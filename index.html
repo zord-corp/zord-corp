@@ -24,18 +24,14 @@
             text-align: center;
             background: linear-gradient(180deg, #112240 0%, #0a192f 100%);
         }
-        .logo-container {
+        /* Estilo para tu Logo Cargado */
+        .logo-zord {
+            width: 150px; /* Ajusta el tamaño según prefieras */
+            height: auto;
+            border-radius: 10px;
             margin-bottom: 20px;
-        }
-        /* Estilo del Logo SVG */
-        .zord-logo {
-            width: 80px;
-            height: 80px;
-            fill: none;
-            stroke: var(--green);
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+            border: 1px solid rgba(100, 255, 218, 0.3);
         }
         h1 { color: var(--green); font-size: 2.8rem; margin: 0; letter-spacing: 2px; }
         h2 { color: var(--white); border-bottom: 1px solid var(--green); padding-bottom: 10px; margin-top: 40px; }
@@ -55,12 +51,12 @@
 
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }
         .card { background: var(--light-navy); padding: 25px; border-radius: 10px; border: 1px solid rgba(100, 255, 218, 0.1); transition: 0.3s; }
-        .card:hover { border-color: var(--green); transform: translateY(-5px); box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7); }
+        .card:hover { border-color: var(--green); transform: translateY(-5px); }
         .card h3 { color: var(--white); margin-top: 0; }
 
         table { width: 100%; border-collapse: collapse; margin-top: 20px; color: var(--white); }
         th, td { padding: 15px; text-align: left; border-bottom: 1px solid #233554; }
-        th { color: var(--green); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        th { color: var(--green); font-size: 0.75rem; text-transform: uppercase; }
         .score { font-weight: bold; color: var(--green); font-family: 'Courier New', monospace; }
         .status-tag { font-size: 0.7rem; background: rgba(100, 255, 218, 0.1); padding: 4px 8px; border-radius: 3px; }
 
@@ -78,15 +74,7 @@
 
 <header>
     <div class="logo-container">
-        <svg class="zord-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7l0 10 10 5 10-5V7L12 2z"/>
-            <path d="M12 22V12"/>
-            <path d="M12 12L2 7"/>
-            <path d="M12 12l10-5"/>
-            <circle cx="12" cy="12" r="3" fill="rgba(100, 255, 218, 0.2)"/>
-            <path d="M8 10c0 0 2 2 4 2s4-2 4-2" stroke-width="1.5"/>
-            <path d="M8 14c0 0 2-2 4-2s4 2 4 2" stroke-width="1.5"/>
-        </svg>
+        <img src="Logo ZORD.jpg" alt="ZORD Logo" class="logo-zord">
     </div>
     <h1>ZORD SpA</h1>
     <p style="color: var(--white); font-weight: 300; letter-spacing: 1px;">Soberanía Tecnológica e Innovación en Bioingeniería</p>
@@ -100,42 +88,42 @@
 <div class="container">
     <section id="vision">
         <h2>Visión Estratégica</h2>
-        <p>ZORD SpA opera en la intersección de la ciencia de datos masiva y la biología molecular. Nuestra infraestructura permite la identificación y optimización de <strong>activos bio-digitales</strong> con estabilidad superior, protegidos bajo estrictos protocolos de propiedad industrial (Ley 19.039).</p>
+        <p>ZORD SpA opera en la intersección de la ciencia de datos masiva y la biología molecular. Nuestra infraestructura permite la identificación y optimización de <strong>activos bio-digitales</strong> con estabilidad superior, protegidos bajo la <strong>Ley 19.039</strong>.</p>
     </section>
 
     <div class="grid">
         <div class="card">
             <h3>Motor Z-SUSY</h3>
-            <p>Algoritmos propietarios en C++ diseñados para el análisis termodinámico de proteínas a gran escala. Optimización multihilo para la validación acelerada de secuencias críticas.</p>
+            <p>Algoritmos propietarios en C++ diseñados para el análisis termodinámico de proteínas a gran escala. Optimización multihilo en 8 núcleos activos.</p>
         </div>
         <div class="card">
             <h3>Ciber-Defensa</h3>
-            <p>Arquitectura de protección de datos genómicos. Implementación de capas de seguridad simétrica para el resguardo de activos de propiedad industrial del Holding.</p>
+            <p>Implementación de capas de seguridad simétrica para el resguardo de activos de propiedad industrial del Holding.</p>
         </div>
     </div>
 
     <section id="data">
         <h2>Reporte de Activos Validados</h2>
-        <p>Selección de variantes con mayor índice de estabilidad detectadas por el motor en el dataset UniProt 2025.</p>
+        <p>Resultados del procesamiento masivo del dataset UniProt 2025.</p>
         <table>
             <thead>
                 <tr>
                     <th>Entry ID</th>
                     <th>Clasificación / Organismo</th>
                     <th>Z-Stability Score</th>
-                    <th>Estatus Legal</th>
+                    <th>Estatus</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Q6C354</td>
-                    <td>Yarrowia lipolytica (Dehydratase)</td>
+                    <td>Yarrowia lipolytica (Mitochondrial)</td>
                     <td class="score">0.99998</td>
                     <td><span class="status-tag">PROTECTED</span></td>
                 </tr>
                 <tr>
                     <td>Q95X94</td>
-                    <td>C. elegans (Hyls-1 Protein)</td>
+                    <td>C. elegans (Centriolar)</td>
                     <td class="score">0.99997</td>
                     <td><span class="status-tag">PROTECTED</span></td>
                 </tr>
@@ -151,11 +139,9 @@
 </div>
 
 <footer class="legal-footer">
-    <div style="margin-bottom: 10px;">
-        <strong style="color: var(--white);">ZORD SpA - Registro de Propiedad Industrial</strong>
-    </div>
+    <strong>ZORD SpA - Registro de Propiedad Industrial</strong><br>
     RUT: 78.322.886-6 | Santiago de Chile<br>
-    <span style="color: var(--green); opacity: 0.7;">Confidencialidad Nivel 4 - Acceso restringido a activos validados.</span>
+    <span style="color: var(--green); opacity: 0.7;">Toda la información generada es propiedad confidencial del Holding.</span>
 </footer>
 
 </body>
