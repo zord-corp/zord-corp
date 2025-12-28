@@ -26,11 +26,21 @@
             background-color: var(--lab-white);
             border-bottom: 2px solid var(--zord-cyan);
         }
-        /* Logo centrado y sin texto redundante */
         .logo-zord {
             width: 220px;
             height: auto;
             margin-bottom: 10px;
+        }
+        /* Estilo específico para la imagen 3D de la Proteína */
+        .protein-render {
+            display: block;
+            max-width: 900px;
+            width: 90%;
+            height: auto;
+            margin: 40px auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
         }
         .tagline {
             color: var(--text-light);
@@ -78,7 +88,7 @@
         .status-tag { font-size: 0.7rem; background: #e8f5e9; color: #2e7d32; padding: 5px 10px; border-radius: 20px; font-weight: bold; }
 
         .legal-footer {
-            margin-top: 100px;
+            margin-top: 60px;
             padding: 50px;
             font-size: 0.8rem;
             background-color: var(--lab-white);
@@ -107,7 +117,7 @@
         <p>ZORD SpA se especializa en la optimización de activos bio-digitales. A través del motor <strong>Z-SUSY</strong>, procesamos datasets masivos para la identificación de estructuras proteicas de alta estabilidad termodinámica, asegurando la propiedad industrial bajo la <strong>Ley 19.039</strong>.</p>
     </section>
 
-    <div class="grid">
+    <div class="grid" style="margin-bottom: 40px;">
         <div class="card">
             <h3>División Biotecnológica</h3>
             <p>Análisis de estabilidad molecular mediante procesamiento paralelo. Validación de secuencias optimizadas para aplicaciones industriales y farmacológicas.</p>
@@ -151,6 +161,12 @@
             </tbody>
         </table>
     </section>
+
+    <div style="text-align: center; margin-top: 60px;">
+        <h2 style="font-size: 1.2rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 2px;">Renderizado Estructural: AlphaFold Z-Protein</h2>
+        <img src="AlphaFold Z protein.jpeg" alt="AlphaFold Z-Protein Render" class="protein-render">
+        <p style="font-size: 0.8rem; color: var(--text-light);">Visualización tridimensional de alta fidelidad basada en predicción de plegamiento Z-SUSY.</p>
+    </div>
 </div>
 
 <footer class="legal-footer">
