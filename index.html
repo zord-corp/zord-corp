@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZORD SpA | Bio-Digital Assets & High-Performance Computing</title>
+    <style>
+        :root {
+            --bg: #0a192f;
+            --light-navy: #112240;
+            --green: #64ffda;
+            --white: #e6f1ff;
+            --slate: #8892b0;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--slate);
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            margin: 0;
+            scroll-behavior: smooth;
+        }
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(180deg, #112240 0%, #0a192f 100%);
+        }
+        h1 { color: var(--green); font-size: 2.5rem; margin: 0; }
+        h2 { color: var(--white); border-bottom: 1px solid var(--green); padding-bottom: 10px; }
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+        
+        .status-bar {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--green);
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 20px 0;
+            border-left: 4px solid var(--green);
+        }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }
+        .card { background: var(--light-navy); padding: 25px; border-radius: 10px; border: 1px solid transparent; transition: 0.3s; }
+        .card:hover { border-color: var(--green); transform: translateY(-5px); }
+        .card h3 { color: var(--white); margin-top: 0; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; color: var(--white); }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #233554; }
+        th { color: var(--green); font-size: 0.8rem; text-transform: uppercase; }
+        .score { font-weight: bold; color: var(--green); }
+
+        .legal-footer {
+            margin-top: 60px;
+            padding: 40px;
+            font-size: 0.8rem;
+            border-top: 1px solid #233554;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>ZORD SpA</h1>
+    <p>Soberanía Tecnológica e Innovación en Bioingeniería</p>
+    <div class="container">
+        <div class="status-bar">
+            [RUNNING] Z-SUSY ENGINE V1.2.1 | TOTAL_SAMPLES: 573,662 | MULTI-CORE: ACTIVE
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <section id="vision">
+        <h2>Visión Estratégica</h2>
+        <p>ZORD SpA opera en la frontera de la ciencia de datos y la biología estructural. Nuestra misión es la identificación y optimización de <strong>activos bio-digitales</strong> con alta estabilidad termodinámica, garantizando la propiedad intelectual bajo el marco de la <strong>Ley 19.039</strong>.</p>
+    </section>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Motor Z-SUSY</h3>
+            <p>Framework propietario desarrollado en C++ para el procesamiento paralelo de secuencias proteicas. Utiliza algoritmos de optimización de memoria y balanceo de carga en múltiples núcleos.</p>
+        </div>
+        <div class="card">
+            <h3>Ciber-Defensa</h3>
+            <p>Implementación de protocolos de seguridad avanzada para la protección de bancos de datos genómicos y resultados de simulación de alta fidelidad.</p>
+        </div>
+    </div>
+
+    <section id="data">
+        <h2>Últimos Activos Validados</h2>
+        <p>Resultados obtenidos tras el procesamiento masivo del dataset UniProt 2025.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Entry ID</th>
+                    <th>Organismo / Proteína</th>
+                    <th>Z-Stability Score</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Q6C354</td>
+                    <td>Yarrowia lipolytica (Mitochondrial)</td>
+                    <td class="score">0.99998</td>
+                    <td>PROTECTED</td>
+                </tr>
+                <tr>
+                    <td>Q95X94</td>
+                    <td>C. elegans (Centriolar)</td>
+                    <td class="score">0.99997</td>
+                    <td>PROTECTED</td>
+                </tr>
+                <tr>
+                    <td>A6NHQ4</td>
+                    <td>Homo sapiens (EPOP)</td>
+                    <td class="score">0.99997</td>
+                    <td>PROTECTED</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+
+<footer class="legal-footer">
+    <strong>ZORD SpA - Registro de Propiedad Industrial</strong><br>
+    RUT: 78.322.886-6 | Santiago de Chile<br>
+    Toda la información generada por el motor Z-SUSY es propiedad confidencial del Holding.
+</footer>
+
+</body>
+</html>
