@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZORD S.p.A. - TRIDENTE Tactical Link</title>
+    <style>
+        body { background-color: #0a0a0a; color: #00f2ff; font-family: 'Courier New', Courier, monospace; overflow: hidden; margin: 0; padding: 20px; }
+        #radar { width: 300px; height: 300px; border: 2px solid #00f2ff; border-radius: 50%; margin: 20px auto; position: relative; background: radial-gradient(circle, #003333 0%, #0a0a0a 70%); }
+        #sweep { width: 150px; height: 150px; background: linear-gradient(45deg, rgba(0,242,255,0.4) 0%, transparent 50%); position: absolute; top: 0; left: 0; transform-origin: bottom right; animation: sweep 4s linear infinite; }
+        @keyframes sweep { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .target { width: 8px; height: 8px; background: red; border-radius: 50%; position: absolute; box-shadow: 0 0 10px red; animation: blink 1s infinite; }
+        .status-box { border: 1px solid #00f2ff; padding: 10px; font-size: 12px; margin-top: 10px; background: rgba(0, 242, 255, 0.05); }
+        .header { text-align: center; border-bottom: 2px solid #00f2ff; padding-bottom: 10px; }
+        .blink { animation: blink 1s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <strong>ZORD S.p.A. - TRIDENTE-1</strong><br>
+        <small>ENLACE CIFRADO PQC V.2026.1</small>
+    </div>
+    
+    <div id="radar">
+        <div id="sweep"></div>
+        <div class="target" style="top: 120px; left: 180px;"></div>
+    </div>
+
+    <div class="status-box">
+        > ESTADO: <span class="blink" style="color: #0f0;">ACTIVO</span><br>
+        > MODO: ESCUCHA PASIVA (CORRIENTE HUMBOLDT)<br>
+        > PQC ENCRYPTION: AES-256-LATTICE-ENABLED<br>
+        > TARGET_ID: TGT-ALPHA-26<br>
+        > FIRMA: MOTOR DIESEL NO IDENTIFICADO (POSIBLE PESQUERO)<br>
+        > DISTANCIA: 42.4 KM / RUMBO: 285°
+    </div>
+
+    <div style="font-size: 10px; margin-top: 20px; color: #555; text-align: center;">
+        ACCESO RESTRINGIDO - ARMADA DE CHILE - 2026
+    </div>
+
+    <script>
+        // Simulación de actualización de datos
+        setInterval(() => {
+            const dist = (42.4 + (Math.random() * 0.2)).toFixed(2);
+            document.querySelector('.status-box').innerHTML = `
+                > ESTADO: <span class="blink" style="color: #0f0;">ACTIVO</span><br>
+                > MODO: ESCUCHA PASIVA (CORRIENTE HUMBOLDT)<br>
+                > PQC ENCRYPTION: AES-256-LATTICE-ENABLED<br>
+                > TARGET_ID: TGT-ALPHA-26<br>
+                > FIRMA: MOTOR DIESEL NO IDENTIFICADO<br>
+                > DISTANCIA: ${dist} KM / RUMBO: 285°
+            `;
+        }, 3000);
+    </script>
+</body>
+</html>
