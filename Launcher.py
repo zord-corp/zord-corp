@@ -1,66 +1,37 @@
 import requests
-import json
 
-# ==============================================================================
-# CONFIGURACIÓN DE CONEXIÓN (VINCULACIÓN CON RENDER)
-# ==============================================================================
-# La URL de tu motor en producción
-RENDER_API_URL = "https://zsusy-zsecure-engine.onrender.com/admin/add_credits"
+# 1. Datos de conexión
+URL = "https://zsusy-zsecure-engine.onrender.com/admin/add_credits"
+TOKEN = "Zord-Bci-Secure-99x#" # La clave que funcionó en PS
 
-# El Token que definimos en las variables de entorno de Render
-# Asegúrate de que coincida con el que pusiste en el panel de Render
-ZORD_ADMIN_TOKEN = "Zord-Bci-Secure-99x#" 
-
-def cargar_creditos_cliente(api_key, cantidad, nombre_cliente="Cliente Nuevo"):
-    """
-    Función maestra para inyectar créditos desde zord.cl hacia el motor ZSusy.
-    Se activa automáticamente tras un pago exitoso en el BCI vía Flow.cl.
-    """
-    
-    print(f"[*] Iniciando carga de {cantidad} créditos para: {nombre_cliente}...")
-
+def ejecutar_carga():
+    # 2. Configuración de Headers (Exactamente como en PS)
     headers = {
-        "ZORD-ADMIN-TOKEN": ZORD_ADMIN_TOKEN,
+        "ZORD-ADMIN-TOKEN": TOKEN,
         "Content-Type": "application/json"
     }
 
+    # 3. Cuerpo de la petición
     payload = {
-        "api_key": api_key,
-        "cantidad": cantidad,
-        "nombre": nombre_cliente
+        "api_key": "ZORD-DEMO-1234",
+        "cantidad": 1000,
+        "nombre": "Empresa_Partner_Z"
     }
 
+    print(f"[*] Intentando conectar con ZSusy Engine...")
+
     try:
-        # Enviamos la orden al servidor de Render
-        response = requests.post(RENDER_API_URL, json=payload, headers=headers)
+        # Usamos json=payload para que requests maneje el Content-Type automáticamente
+        response = requests.post(URL, json=payload, headers=headers)
         
         if response.status_code == 200:
-            print(f"[SUCCESS] {response.json()['message']}")
-            return True
-        elif response.status_code == 403:
-            print("[ERROR] Token de Administración inválido. Revisa las variables de entorno en Render.")
-            return False
+            print("[SUCCESS] Respuesta del servidor:", response.json())
         else:
-            print(f"[ERROR] El servidor respondió con código: {response.status_code}")
-            print(f"Detalle: {response.text}")
-            return False
-
+            print(f"[ERROR] Código: {response.status_code}")
+            print(f"Detalle del servidor: {response.text}")
+            
     except Exception as e:
-        print(f"[CRITICAL ERROR] No se pudo contactar con el motor ZSusy: {e}")
-        return False
+        print(f"[CRITICAL] Error de conexión: {e}")
 
-# ==============================================================================
-# ZONA DE PRUEBAS (Simulación de Venta)
-# ==============================================================================
 if __name__ == "__main__":
-    # Supongamos que acabamos de recibir un pago por un pack de 1,000 llaves
-    test_key = "ZORD-DEMO-1234"
-    pack_comprado = 1000
-    nombre = "Empresa_Partner_Z"
-
-    exito = cargar_creditos_cliente(test_key, pack_comprado, nombre)
-    
-    if exito:
-        print("[*] Sistema listo para la siguiente transacción.")
-    else:
-        print("[!] Revisa la conexión con la base de datos en Oregon.")
+    ejecutar_carga()
