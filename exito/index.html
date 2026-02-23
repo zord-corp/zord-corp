@@ -117,6 +117,26 @@
         document.getElementById('generatedKey').style.color = "#7f8c8d";
     }
 </script>
+<script>
+    // 1. Capturar los datos que Flow envía al retornar
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenFlow = urlParams.get('token');
 
+    if (tokenFlow) {
+        // 2. Avisar a Render que hubo un éxito (El puente)
+        fetch('https://zsusy-zsecure-engine.onrender.com/webhook-flow', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `token=${tokenFlow}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === "success") {
+                document.getElementById('generatedKey').innerText = data.key;
+                console.log("Sistema Z-Core activado y correo enviado.");
+            }
+        });
+    }
+</script>
 </body>
 </html>
