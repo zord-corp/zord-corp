@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ZORD | Activación Exitosa</title>
+    <style>
+        body { background: #f8f9fa; font-family: sans-serif; text-align: center; padding: 50px; }
+        .success-card { 
+            background: white; max-width: 600px; margin: auto; padding: 40px; 
+            border-radius: 15px; border-top: 5px solid #00bfa5; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .key-display { 
+            background: #1a1a1a; color: #00ffcc; padding: 20px; font-family: monospace; 
+            font-size: 1.5rem; border-radius: 8px; margin: 25px 0; border: 1px dashed #00bfa5;
+        }
+        .btn-home { 
+            background: #00bfa5; color: white; padding: 12px 25px; 
+            text-decoration: none; border-radius: 5px; font-weight: bold; 
+        }
+    </style>
+</head>
+<body>
+    <div class="success-card">
+        <h2 style="color: #2c3e50;">¡Pago Confirmado!</h2>
+        <p>Su transacción ha sido procesada por Flow y verificada en el BCI.</p>
+        <p style="font-size: 0.9rem; color: #7f8c8d;">Su nueva API-KEY de 512-bits ha sido activada:</p>
+        
+        <div class="key-display" id="generatedKey">
+            GENERANDO...
+        </div>
+
+        <p style="margin-bottom: 30px;">También hemos enviado una copia a su correo electrónico.</p>
+        <a href="https://zord.cl" class="btn-home">Ir a mi Consola</a>
+    </div>
+
+    <script>
+        // Esta lógica captura el token de Flow en la URL para identificar al cliente
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('tokenLog'); 
+        
+        // Aquí podrías hacer una llamada rápida a tu API para mostrar la llave real
+        // Por ahora simulamos la carga
+        setTimeout(() => {
+            document.getElementById('generatedKey').innerText = "ZORD-PRO-XXXX-XXXX";
+        }, 1500);
+    </script>
+</body>
+</html>
