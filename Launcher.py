@@ -9,7 +9,7 @@ RENDER_API_URL = "https://zsusy-zsecure-engine.onrender.com/admin/add_credits"
 
 # El Token que definimos en las variables de entorno de Render
 # Asegúrate de que coincida con el que pusiste en el panel de Render
-ZORD_ADMIN_TOKEN = "ZORD_SECRET_2026" 
+ZORD_ADMIN_TOKEN = "Zord-Bci-Secure-99x#" 
 
 def cargar_creditos_cliente(api_key, cantidad, nombre_cliente="Cliente Nuevo"):
     """
