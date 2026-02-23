@@ -118,23 +118,29 @@
     }
 </script>
 <script>
-    // 1. Capturar los datos que Flow envía al retornar
     const urlParams = new URLSearchParams(window.location.search);
     const tokenFlow = urlParams.get('token');
+    const display = document.getElementById('generatedKey');
 
     if (tokenFlow) {
-        // 2. Avisar a Render que hubo un éxito (El puente)
+        display.innerText = "ACTIVANDO CREDENCIALES...";
+        
         fetch('https://zsusy-zsecure-engine.onrender.com/webhook-flow', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `token=${tokenFlow}`
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: tokenFlow })
         })
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => {
             if(data.status === "success") {
-                document.getElementById('generatedKey').innerText = data.key;
-                console.log("Sistema Z-Core activado y correo enviado.");
+                display.innerText = data.key;
+                display.style.color = "#00ffcc";
+            } else {
+                display.innerText = "ERROR EN ACTIVACIÓN";
             }
+        })
+        .catch(err => {
+            display.innerText = "REVISE SU EMAIL";
         });
     }
 </script>
