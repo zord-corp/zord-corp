@@ -1,37 +1,45 @@
 import requests
+import secrets
+import string
 
-# 1. Datos de conexión
-URL = "https://zsusy-zsecure-engine.onrender.com/admin/add_credits"
-TOKEN = "Zord-Bci-Secure-99x#" # La clave que funcionó en PS
+# =============================================================
+# CONFIGURACIÓN SEGURA (Vínculo con Render)
+# =============================================================
+RENDER_URL = "https://zsusy-zsecure-engine.onrender.com/admin/add_credits"
+ZORD_ADMIN_TOKEN = "Zord-Bci-Secure-99x#"  # Tu clave maestra validada
 
-def ejecutar_carga():
-    # 2. Configuración de Headers (Exactamente como en PS)
+def generar_nueva_api_key(plan="STD"):
+    """
+    Genera una API KEY única con prefijo para el cliente.
+    Ejemplo: ZORD-STD-A1B2C3D4E5F6
+    """
+    # Usamos secrets para una generación criptográficamente segura
+    random_str = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(12))
+    return f"ZORD-{plan}-{random_str}"
+
+def registrar_en_render(api_key, cantidad, nombre_cliente):
+    """
+    Inyecta la nueva llave y sus créditos en la base de datos de Oregon.
+    """
     headers = {
-        "ZORD-ADMIN-TOKEN": TOKEN,
+        "ZORD-ADMIN-TOKEN": ZORD_ADMIN_TOKEN,
         "Content-Type": "application/json"
     }
-
-    # 3. Cuerpo de la petición
+    
     payload = {
-        "api_key": "ZORD-DEMO-1234",
-        "cantidad": 1000,
-        "nombre": "Empresa_Partner_Z"
+        "api_key": api_key,
+        "cantidad": cantidad,
+        "nombre": nombre_cliente
     }
-
-    print(f"[*] Intentando conectar con ZSusy Engine...")
-
+    
     try:
-        # Usamos json=payload para que requests maneje el Content-Type automáticamente
-        response = requests.post(URL, json=payload, headers=headers)
-        
+        response = requests.post(RENDER_URL, json=payload, headers=headers)
         if response.status_code == 200:
-            print("[SUCCESS] Respuesta del servidor:", response.json())
+            print(f"[CEREBRO] Éxito: {nombre_cliente} activado con {cantidad} créditos.")
+            return True
         else:
-            print(f"[ERROR] Código: {response.status_code}")
-            print(f"Detalle del servidor: {response.text}")
-            
+            print(f"[CEREBRO] Error Render: {response.text}")
+            return False
     except Exception as e:
-        print(f"[CRITICAL] Error de conexión: {e}")
-
-if __name__ == "__main__":
-    ejecutar_carga()
+        print(f"[CEREBRO] Error Crítico de conexión: {e}")
+        return False
