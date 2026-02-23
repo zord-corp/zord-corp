@@ -1,44 +1,89 @@
+import smtplib
+from email.message import EmailMessage
 from flask import Flask, request, jsonify
-import launcher  # Importamos tu lógica del Paso 2
+import launcher  # Importa generar_nueva_api_key y registrar_en_render
 
 app = Flask(__name__)
 
-# Llave de seguridad para que solo Flow pueda enviarte datos
-# Puedes encontrarla en tu panel de Flow como "Secret Key"
+# =============================================================
+# CONFIGURACIÓN DE CREDENCIALES
+# =============================================================
+# Flow (Obtenlas en Datos de Integración)
 FLOW_SECRET = "TU_SECRET_KEY_DE_FLOW" 
 
+# Gmail / Google Workspace (zord.spa@zord.cl)
+USUARIO_ZORD = "zord.spa@zord.cl"
+PASS_APP_GOOGLE = "xxxx xxxx xxxx xxxx" # Las 16 letras que generaste
+
+# =============================================================
+# FUNCIÓN DE ENVÍO DE EMAIL
+# =============================================================
+def enviar_llave_cliente(email_destino, api_key_generada, plan_nombre):
+    """
+    Envía la credencial técnica automáticamente tras el pago.
+    """
+    msg = EmailMessage()
+    
+    contenido = f"""
+    PROTOCOLO DE ENTREGA - ZORD SpA
+    -------------------------------------------
+    Estimado Cliente,
+    
+    Confirmamos la recepción de su pago para el plan {plan_nombre}. 
+    Su acceso al motor de entropía ZSusy ha sido habilitado exitosamente.
+    
+    DETALLES DE LA CREDENCIAL:
+    > X-API-KEY: {api_key_generada}
+    > Estatus: ACTIVA / SALDO CARGADO
+    
+    INSTRUCCIONES:
+    1. Valide su saldo en tiempo real en: https://zord.cl
+    2. Documentación de API disponible en el portal.
+    
+    Soberanía Tecnológica y Estabilidad Molecular.
+    ZORD SpA - Villa Alemana, Chile.
+    -------------------------------------------
+    Este es un mensaje automático generado por Z-Core Engine.
+    """
+    msg.set_content(contenido)
+
+    msg['Subject'] = f'🔑 Su API-KEY ZORD está lista ({plan_nombre})'
+    msg['From'] = USUARIO_ZORD
+    msg['To'] = email_destino
+
+    try:
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(USUARIO_ZORD, PASS_APP_GOOGLE)
+            smtp.send_message(msg)
+            print(f"[MAIL] Protocolo enviado exitosamente a {email_destino}")
+            return True
+    except Exception as e:
+        print(f"[MAIL ERROR] No se pudo enviar el correo: {e}")
+        return False
+
+# =============================================================
+# RUTA WEBHOOK (ENTRADA DE FLOW)
+# =============================================================
 @app.route('/webhook-flow', methods=['POST'])
 def webhook_flow():
-    """
-    Este es el punto de entrada que Flow llama automáticamente
-    cuando el BCI confirma el pago.
-    """
-    # 1. Recibir el token del pago desde Flow
+    # 1. Recibir token de Flow
     token_pago = request.form.get('token')
-    
     if not token_pago:
         return "Token no encontrado", 400
 
-    # 2. Lógica de Negocio: Determinar el Plan
-    # En una integración real, aquí consultarías a la API de Flow 
-    # usando el token para saber qué compró exactamente el cliente.
-    
-    # --- SIMULACIÓN DE RESULTADO DE PAGO ---
+    # --- SIMULACIÓN DE VALIDACIÓN DE PAGO ---
+    # En producción, aquí usarías el SDK de Flow para confirmar monto y estado
     pago_exitoso = True 
-    email_cliente = request.form.get('email', 'cliente_nuevo@zord.cl')
-    
-    # Determinamos el plan (esto suele venir en un campo 'status' o 'amount')
-    # Por ahora, simularemos que si el pago es exitoso, le damos el plan PRO
-    plan_comprado = "PRO" 
+    email_cliente = request.form.get('email', 'soporte@zord.cl') # Fallback por si no viene email
+    plan_comprado = "PRO" # Deberías obtenerlo según el monto pagado
     creditos = 5000 if plan_comprado == "PRO" else 1000
 
     if pago_exitoso:
-        # 3. Generar la API-KEY única (ZORD-PRO-XXXX...)
+        # 2. Generar la Key única (ZORD-PRO-...)
         nueva_api_key = launcher.generar_nueva_api_key(plan_comprado)
         
-        # 4. Registrar en el motor ZSusy (Render / PostgreSQL Oregon)
-        print(f"[*] Procesando compra de {email_cliente}. Generando llave...")
-        
+        # 3. Registrar en Render (PostgreSQL Oregon)
+        print(f"[*] Inyectando {creditos} créditos para {email_cliente}...")
         exito_registro = launcher.registrar_en_render(
             api_key=nueva_api_key,
             cantidad=creditos,
@@ -46,16 +91,20 @@ def webhook_flow():
         )
 
         if exito_registro:
-            # 5. Aquí es donde el sistema "se paga solo"
-            print(f"[EXITO] Cliente {email_cliente} activado. Key: {nueva_api_key}")
+            # 4. Enviar el correo automático
+            enviar_llave_cliente(email_cliente, nueva_api_key, plan_comprado)
             
-            # TODO: Aquí podrías añadir una función para enviar la llave por email
-            return jsonify({"status": "success", "key_generada": nueva_api_key}), 200
+            # 5. Respuesta final exitosa
+            print(f"[EXITO] Proceso completado para {email_cliente}")
+            return jsonify({
+                "status": "success", 
+                "message": "Credenciales enviadas",
+                "key": nueva_api_key # Solo para registro interno
+            }), 200
         else:
-            return "Error al registrar en motor Render", 500
+            return "Error en registro de motor", 500
 
-    return "Pago no aprobado", 402
+    return "Pago fallido", 402
 
 if __name__ == '__main__':
-    # Tu servidor web debe correr este proceso en el puerto 5000 o el que use tu hosting
     app.run(port=5000)
