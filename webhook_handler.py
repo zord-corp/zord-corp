@@ -13,7 +13,7 @@ FLOW_SECRET = "TU_SECRET_KEY_DE_FLOW"
 
 # Gmail / Google Workspace (zord.spa@zord.cl)
 USUARIO_ZORD = "zord.spa@zord.cl"
-PASS_APP_GOOGLE = "xxxx xxxx xxxx xxxx" # Las 16 letras que generaste
+PASS_APP_GOOGLE = "jqgj fmzv qtya kdiw" # Las 16 letras que generaste
 
 # =============================================================
 # FUNCIÓN DE ENVÍO DE EMAIL
