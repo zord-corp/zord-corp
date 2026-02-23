@@ -10,24 +10,122 @@
             --lab-white: #ffffff;
             --lab-bg: #f8f9fa;
             --zord-cyan: #00bfa5;
+            --zord-dark: #1a1a1a;
             --text-main: #2c3e50;
             --text-light: #7f8c8d;
             --border: #dee2e6;
         }
-        body { background-color: var(--lab-bg); color: var(--text-main); font-family: 'Segoe UI', sans-serif; margin: 0; line-height: 1.6; }
-        header { padding: 40px 20px; text-align: center; background-color: var(--lab-white); border-bottom: 2px solid var(--zord-cyan); }
-        .logo-zord { width: 220px; height: auto; margin-bottom: 10px; }
-        .tagline { color: var(--text-light); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+        body {
+            background-color: var(--lab-bg);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: var(--lab-white);
+            border-bottom: 2px solid var(--zord-cyan);
+        }
+        .logo-zord {
+            width: 220px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .tagline {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
         .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
-        .status-bar { background: #e0f2f1; color: #00796b; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; margin-bottom: 40px; border: 1px solid #b2dfdb; display: flex; justify-content: space-between; }
+        
+        .status-bar {
+            background: #e0f2f1;
+            color: #00796b;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            margin-bottom: 40px;
+            border: 1px solid #b2dfdb;
+            display: flex;
+            justify-content: space-between;
+        }
+
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .card { background: var(--lab-white); padding: 30px; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-        .card h3 { color: var(--zord-cyan); margin-top: 0; }
-        .api-portal { background: #1a1a1a; color: #00ffcc; padding: 25px; border-radius: 12px; font-family: 'Courier New', monospace; border: 1px solid var(--zord-cyan); }
-        .btn-buy { background: var(--zord-cyan); color: white; border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; cursor: pointer; text-transform: uppercase; text-decoration: none; display: inline-block; margin-top: 15px; }
-        .input-key { background: #333; border: 1px solid #444; color: #00ffcc; padding: 10px; width: 100%; margin-bottom: 10px; border-radius: 4px; box-sizing: border-box; }
-        .live-dot { height: 10px; width: 10px; background-color: #00ffcc; border-radius: 50%; display: inline-block; margin-right: 5px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .card { 
+            background: var(--lab-white); 
+            padding: 30px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+        }
+        .card h3 { 
+            color: var(--zord-cyan); 
+            margin-top: 0; 
+            border-bottom: 1px solid var(--lab-bg);
+            padding-bottom: 10px;
+        }
+
+        /* Estilos de los Botones de Pago */
+        .btn-flow {
+            display: block;
+            text-align: center;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        .btn-std { background-color: #34495e; color: white; }
+        .btn-pro { background-color: var(--zord-cyan); color: white; }
+        .btn-flow:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* Consola de Cliente */
+        .api-portal {
+            background: var(--zord-dark);
+            color: #00ffcc;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            border: 1px solid var(--zord-cyan);
+            margin-top: 20px;
+        }
+        .input-key {
+            background: #333;
+            border: 1px solid #444;
+            color: #00ffcc;
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn-check {
+            background: var(--zord-cyan);
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 18px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: #f1f3f5; color: var(--text-light); font-size: 0.75rem; text-transform: uppercase; }
+        .score { font-weight: bold; color: #00796b; font-family: 'Courier New', monospace; }
+        .status-tag { font-size: 0.7rem; background: #e8f5e9; color: #2e7d32; padding: 5px 10px; border-radius: 20px; font-weight: bold; }
+
+        .protein-render { display: block; max-width: 900px; width: 90%; height: auto; margin: 40px auto; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid var(--border); }
         .legal-footer { margin-top: 60px; padding: 50px; font-size: 0.8rem; background-color: var(--lab-white); border-top: 1px solid var(--border); text-align: center; color: var(--text-light); }
     </style>
 </head>
@@ -42,76 +140,94 @@
 <div class="container">
     <div class="status-bar">
         <span>● DOMAIN_STATUS: zord.cl [ACTIVE]</span>
-        <span>ENTROPY: 7.9999 bits/byte</span>
+        <span>ENTROPY: 512-bit / Layer</span>
         <span>PATENT: PENDING_202504049</span>
     </div>
 
-    <section id="cyber-access" style="margin-bottom: 40px;">
-        <h2>Z-Cyber Defense: Adquisición y Acceso</h2>
-        <div class="grid">
-            <div class="card">
-    <h3>Suministro de Entropía</h3>
-    <p>Seleccione un plan para adquirir créditos del motor <strong>ZSusy</strong>. La activación es instantánea.</p>
-    
-    <div style="display: flex; flex-direction: column; gap: 10px;">
-        <a href="https://www.flow.cl/btn.php?token=d8983f0ad520a29dbf8e3d8b771d7141497f5278" 
-           class="btn-buy" style="background: #34495e; text-align: center;">
-           ADQUIRIR PLAN STD (1.000 Keys)
-        </a>
+    <section id="vision">
+        <h2>Protocolo de Operaciones</h2>
+        <p>ZORD SpA especializa la optimización de activos críticos mediante el motor <strong>Z-Core Engine</strong>, aplicando dinámicas hamiltonianas para estabilidad molecular y entropía criptográfica compatible con estándares post-cuánticos.</p>
+    </section>
 
-        <a href="https://www.flow.cl/btn.php?token=r8dd93cbc9f65bcb75484f92855e1fcf1bb4aa4b" 
-           class="btn-buy" style="text-align: center;">
-           ADQUIRIR PLAN PRO (5.000 Keys)
-        </a>
-    </div>
-    
-    <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 15px;">
-        * Pagos procesados de forma segura vía Flow.cl (Webpay Plus, Mach, OnePay).
-    </p>
-</div>
+    <div class="grid">
+        <div class="card">
+            <h3>Bio-Industrial Optimization</h3>
+            <p>Mejora de la estabilidad termodinámica de estructuras biológicas (enzimas y proteínas terapéuticas) mediante optimización hamiltoniana.</p>
+            <div style="flex-grow: 1;"></div>
+            <p style="font-size: 0.8rem; color: var(--text-light);">* Consultas técnicas vía correo corporativo.</p>
+        </div>
+
+        <div class="card">
+            <h3>Z-Cyber Defense: Adquisición</h3>
+            <p>Generación de entropía de alta densidad (NIST SP 800-22). Blindaje post-cuántico para infraestructuras críticas.</p>
+            
+            <a href="https://www.flow.cl/btn.php?token=d8983f0ad520a29dbf8e3d8b771d7141497f5278" class="btn-flow btn-std">
+                Adquirir Plan STD (1.000 Keys)
+            </a>
+            <a href="https://www.flow.cl/btn.php?token=r8dd93cbc9f65bcb75484f92855e1fcf1bb4aa4b" class="btn-flow btn-pro">
+                Adquirir Plan PRO (5.000 Keys)
+            </a>
 
             <div class="api-portal">
-                <h3>Consola de Cliente</h3>
-                <label style="font-size: 0.8rem;">VALIDE SU X-API-KEY:</label>
-                <input type="text" id="clientKey" class="input-key" placeholder="ZORD-STD-XXXX">
-                <button onclick="checkCredits()" class="btn-buy" style="padding: 5px 15px; font-size: 0.7rem; width: 100%;">Consultar Créditos</button>
-                
-                <div id="creditResult" style="margin-top: 20px; font-size: 0.9rem; display: none; border-top: 1px solid #333; padding-top: 10px;">
-                    > CLIENTE: <span id="clientName">--</span><br>
-                    > CRÉDITOS: <span id="clientCredits" style="color: #fff; font-weight: bold;">--</span><br>
-                    > STATUS: <span style="color: #00ffcc;">VALIDATED</span>
+                <div style="margin-bottom: 10px; font-size: 0.7rem;">> TERMINAL_ACCESO_CLIENTE</div>
+                <input type="text" id="clientKey" class="input-key" placeholder="ZORD-XXXX-XXXX">
+                <button onclick="checkCredits()" class="btn-check">CONSULTAR CRÉDITOS</button>
+                <div id="creditResult" style="margin-top: 15px; display: none; font-size: 0.85rem;">
+                    > CLIENTE: <span id="resName" style="color:white"></span><br>
+                    > SALDO: <span id="resCredits" style="color:white"></span> KEYS
                 </div>
             </div>
         </div>
-    </section>
-
     </div>
+
+    <section id="data" style="margin-top: 40px;">
+        <h2>Reporte de Estabilidad de Activos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Entry ID</th>
+                    <th>Clasificación del Activo</th>
+                    <th>Improvement Score</th>
+                    <th>Estatus Legal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>sp|P24096</td><td>Vacuna para Thymidine kinase</td><td class="score">+500%</td><td><span class="status-tag">PATENT_PENDING</span></td></tr>
+                <tr><td>Q95X94</td><td>Therapeutic Protein (C. elegans)</td><td class="score">+582.52%</td><td><span class="status-tag">IP_PROTECTED</span></td></tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+
+<footer class="legal-footer">
+    <strong>ZORD SpA | Propiedad Industrial Solicitud N° 202504049</strong><br>
+    Sede Central: Villa Alemana - Chile | <a href="mailto:zord.spa@gmail.com">zord.spa@gmail.com</a><br>
+    <small>© 2026 ZORD SpA. Todos los derechos reservados.</small>
+</footer>
 
 <script>
     async function checkCredits() {
         const key = document.getElementById('clientKey').value;
-        const resultDiv = document.getElementById('creditResult');
-        if(!key) { alert("Ingrese su API KEY"); return; }
+        const resDiv = document.getElementById('creditResult');
+        if(!key) return alert("Ingrese su API-KEY");
 
         try {
-            const response = await fetch('https://zsusy-zsecure-engine.onrender.com/api/v1/keys?cantidad=0', {
+            const response = await fetch(`https://zsusy-zsecure-engine.onrender.com/api/v1/keys?cantidad=0`, {
                 headers: { 'X-API-KEY': key }
             });
             const data = await response.json();
             if(data.status === "success") {
-                document.getElementById('clientName').innerText = data.info.cliente;
-                document.getElementById('clientCredits').innerText = data.info.restantes;
-                resultDiv.style.display = 'block';
-            } else { alert("Key no válida o agotada."); }
-        } catch (e) { alert("Error de conexión con Z-Core."); }
+                document.getElementById('resName').innerText = data.info.cliente;
+                document.getElementById('resCredits').innerText = data.info.restantes;
+                resDiv.style.display = 'block';
+            } else {
+                alert("Llave inválida o sin créditos.");
+            }
+        } catch (e) {
+            alert("Error al conectar con el motor ZSusy.");
+        }
     }
 </script>
-
-<footer class="legal-footer">
-    <strong>ZORD SpA | Propiedad Industrial N° 202504049</strong><br>
-    Sede Central: Villa Alemana - Chile | Registro RUT: 78.322.886-6<br>
-    <small>© 2025 ZORD SpA. Todos los derechos reservados.</small>
-</footer>
 
 </body>
 </html>
