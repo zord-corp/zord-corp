@@ -1,29 +1,24 @@
 import smtplib
 from email.message import EmailMessage
 from flask import Flask, request, jsonify
-import launcher  # Importa generar_nueva_api_key y registrar_en_render
+from flask_cors import CORS  # <--- NUEVO: Para permitir peticiones desde zord.cl
+import launcher 
 
 app = Flask(__name__)
+CORS(app)  # <--- ACTIVACIÓN DE CORS
 
 # =============================================================
 # CONFIGURACIÓN DE CREDENCIALES
 # =============================================================
-# Flow (Obtenlas en Datos de Integración)
 FLOW_SECRET = "TU_SECRET_KEY_DE_FLOW" 
-
-# Gmail / Google Workspace (zord.spa@zord.cl)
 USUARIO_ZORD = "zord.spa@zord.cl"
-PASS_APP_GOOGLE = "jqgj fmzv qtya kdiw" # Las 16 letras que generaste
+PASS_APP_GOOGLE = "jqgj fmzv qtya kdiw" 
 
 # =============================================================
 # FUNCIÓN DE ENVÍO DE EMAIL
 # =============================================================
 def enviar_llave_cliente(email_destino, api_key_generada, plan_nombre):
-    """
-    Envía la credencial técnica automáticamente tras el pago.
-    """
     msg = EmailMessage()
-    
     contenido = f"""
     PROTOCOLO DE ENTREGA - ZORD SpA
     -------------------------------------------
@@ -38,15 +33,13 @@ def enviar_llave_cliente(email_destino, api_key_generada, plan_nombre):
     
     INSTRUCCIONES:
     1. Valide su saldo en tiempo real en: https://zord.cl
-    2. Documentación de API disponible en el portal.
+    2. Utilice esta llave en sus integraciones técnicas.
     
     Soberanía Tecnológica y Estabilidad Molecular.
     ZORD SpA - Villa Alemana, Chile.
     -------------------------------------------
-    Este es un mensaje automático generado por Z-Core Engine.
     """
     msg.set_content(contenido)
-
     msg['Subject'] = f'🔑 Su API-KEY ZORD está lista ({plan_nombre})'
     msg['From'] = USUARIO_ZORD
     msg['To'] = email_destino
@@ -55,35 +48,38 @@ def enviar_llave_cliente(email_destino, api_key_generada, plan_nombre):
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
             smtp.login(USUARIO_ZORD, PASS_APP_GOOGLE)
             smtp.send_message(msg)
-            print(f"[MAIL] Protocolo enviado exitosamente a {email_destino}")
+            print(f"[MAIL] Protocolo enviado a {email_destino}")
             return True
     except Exception as e:
-        print(f"[MAIL ERROR] No se pudo enviar el correo: {e}")
+        print(f"[MAIL ERROR] {e}")
         return False
 
 # =============================================================
-# RUTA WEBHOOK (ENTRADA DE FLOW)
+# RUTA WEBHOOK (PUENTE DESDE /EXITO O FLOW)
 # =============================================================
 @app.route('/webhook-flow', methods=['POST'])
 def webhook_flow():
-    # 1. Recibir token de Flow
-    token_pago = request.form.get('token')
-    if not token_pago:
-        return "Token no encontrado", 400
+    # Detectar si viene como JSON o como Formulario
+    if request.is_json:
+        data = request.get_json()
+        token_pago = data.get('token')
+    else:
+        token_pago = request.form.get('token')
 
-    # --- SIMULACIÓN DE VALIDACIÓN DE PAGO ---
-    # En producción, aquí usarías el SDK de Flow para confirmar monto y estado
+    if not token_pago:
+        return jsonify({"error": "Token no encontrado"}), 400
+
+    # LÓGICA DE ACTIVACIÓN
+    # Nota: Aquí simulamos éxito. En producción validarías con el token contra Flow.
     pago_exitoso = True 
-    email_cliente = request.form.get('email', 'soporte@zord.cl') # Fallback por si no viene email
-    plan_comprado = "PRO" # Deberías obtenerlo según el monto pagado
+    email_cliente = "soporte@zord.cl" # En un flujo real, obtienes esto de Flow vía API
+    plan_comprado = "PRO" 
     creditos = 5000 if plan_comprado == "PRO" else 1000
 
     if pago_exitoso:
-        # 2. Generar la Key única (ZORD-PRO-...)
         nueva_api_key = launcher.generar_nueva_api_key(plan_comprado)
         
-        # 3. Registrar en Render (PostgreSQL Oregon)
-        print(f"[*] Inyectando {creditos} créditos para {email_cliente}...")
+        print(f"[*] Registrando {creditos} créditos para {email_cliente}...")
         exito_registro = launcher.registrar_en_render(
             api_key=nueva_api_key,
             cantidad=creditos,
@@ -91,20 +87,18 @@ def webhook_flow():
         )
 
         if exito_registro:
-            # 4. Enviar el correo automático
             enviar_llave_cliente(email_cliente, nueva_api_key, plan_comprado)
-            
-            # 5. Respuesta final exitosa
-            print(f"[EXITO] Proceso completado para {email_cliente}")
             return jsonify({
                 "status": "success", 
-                "message": "Credenciales enviadas",
-                "key": nueva_api_key # Solo para registro interno
+                "key": nueva_api_key
             }), 200
         else:
-            return "Error en registro de motor", 500
+            return jsonify({"error": "Error en motor Render"}), 500
 
-    return "Pago fallido", 402
+    return jsonify({"error": "Pago no aprobado"}), 402
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    # Puerto estándar para Render
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
