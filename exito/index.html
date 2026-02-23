@@ -1,12 +1,122 @@
-<div class="card" style="text-align: center; border: 2px solid var(--zord-cyan);">
-    <h2 style="color: var(--zord-cyan);">¡PAGO CONFIRMADO!</h2>
-    <p>Su transacción ha sido procesada exitosamente por los sistemas de ZORD SpA.</p>
-    
-    <div style="background: #1a1a1a; color: #00ffcc; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: monospace;">
-        <small style="color: #7f8c8d;">SU API-KEY DE ACCESO:</small><br>
-        <strong style="font-size: 1.5rem;">ZORD-PRO-XXXX-XXXX</strong> 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZORD | Transacción Confirmada</title>
+    <style>
+        :root {
+            --zord-cyan: #00bfa5;
+            --zord-dark: #1a1a1a;
+            --lab-bg: #f8f9fa;
+            --text-main: #2c3e50;
+        }
+        body {
+            background-color: var(--lab-bg);
+            color: var(--text-main);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 600px;
+            text-align: center;
+            border-top: 5px solid var(--zord-cyan);
+        }
+        h1 {
+            color: var(--zord-cyan);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .status-msg {
+            font-weight: 300;
+            color: var(--text-main);
+            margin-bottom: 30px;
+        }
+        .api-box {
+            background: var(--zord-dark);
+            color: #00ffcc;
+            padding: 30px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            margin: 25px 0;
+            border: 1px solid #333;
+        }
+        .api-box small {
+            color: #7f8c8d;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+        .key-text {
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: block;
+            word-break: break-all;
+        }
+        .footer-info {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-top: 30px;
+            line-height: 1.5;
+        }
+        .btn-return {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background-color: var(--zord-cyan);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-return:hover {
+            background-color: #008e7a;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>¡PAGO CONFIRMADO!</h1>
+    <p class="status-msg">Su transacción ha sido procesada exitosamente por los sistemas de <strong>ZORD SpA</strong>.</p>
+
+    <div class="api-box">
+        <small>> SU API-KEY DE ACCESO:</small>
+        <span class="key-text" id="generatedKey">VALIDANDO CREDENCIALES...</span>
     </div>
-    
-    <p style="font-size: 0.9rem;">Se ha enviado un respaldo de esta credencial y el manual de integración a su correo electrónico.</p>
-    <a href="https://zord.cl/" class="btn-buy">Volver al Terminal</a>
+
+    <div class="footer-info">
+        Se ha enviado un respaldo de esta credencial y el manual de integración a su correo electrónico registrado. <br>
+        <strong>Soberanía Tecnológica y Estabilidad Molecular.</strong>
+    </div>
+
+    <a href="https://zord.cl" class="btn-return">VOLVER AL TERMINAL</a>
 </div>
+
+<script>
+    // Este script puede capturar la llave de la URL si decides enviarla vía parámetros
+    const urlParams = new URLSearchParams(window.location.search);
+    const key = urlParams.get('key');
+    if (key) {
+        document.getElementById('generatedKey').innerText = key;
+    } else {
+        document.getElementById('generatedKey').innerText = "REVISE SU EMAIL";
+        document.getElementById('generatedKey').style.color = "#7f8c8d";
+    }
+</script>
+
+</body>
+</html>
