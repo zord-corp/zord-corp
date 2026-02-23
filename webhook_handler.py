@@ -10,7 +10,7 @@ CORS(app)  # <--- ACTIVACIÓN DE CORS
 # =============================================================
 # CONFIGURACIÓN DE CREDENCIALES
 # =============================================================
-FLOW_SECRET = "TU_SECRET_KEY_DE_FLOW" 
+FLOW_SECRET = "a027e1791c1f3919654120ebb688410360b3d72c" 
 USUARIO_ZORD = "zord.spa@zord.cl"
 PASS_APP_GOOGLE = "jqgj fmzv qtya kdiw" 
 
