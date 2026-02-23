@@ -6,7 +6,7 @@ def notificar_pago_exitoso(api_key_cliente, cantidad_comprada, nombre_cliente):
     
     # Este es el Token que definiste en tu archivo zord_api.py
     # ¡CÁMBIALO ALLÁ Y PON EL MISMO AQUÍ!
-    admin_token = "ZORD_SECRET_2026" 
+    admin_token = "Zord-Bci-Secure-99x#" 
 
     headers = {
         "ZORD-ADMIN-TOKEN": admin_token,
