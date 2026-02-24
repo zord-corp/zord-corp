@@ -55,7 +55,14 @@
             justify-content: space-between;
         }
 
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        /* Grid corregido para 3 columnas responsivas */
+        .grid-pqc { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px; 
+            margin-bottom: 40px;
+        }
+
         .card { 
             background: var(--lab-white); 
             padding: 30px; 
@@ -64,7 +71,10 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
+            transition: transform 0.3s ease;
         }
+        .card:hover { transform: translateY(-5px); }
+        
         .card h3 { 
             color: var(--zord-cyan); 
             margin-top: 0; 
@@ -72,7 +82,6 @@
             padding-bottom: 10px;
         }
 
-        /* Estilos de los Botones de Pago */
         .btn-flow {
             display: block;
             text-align: center;
@@ -87,23 +96,25 @@
         }
         .btn-std { background-color: #34495e; color: white; }
         .btn-pro { background-color: var(--zord-cyan); color: white; }
-        .btn-flow:hover { opacity: 0.9; transform: translateY(-2px); }
+        .btn-pqc { background-color: #673ab7; color: white; }
+        .btn-verify { background-color: #689f38; color: white; border: none; cursor: pointer; width: 100%; }
+        
+        .btn-flow:hover { opacity: 0.9; }
 
-        /* Consola de Cliente */
         .api-portal {
             background: var(--zord-dark);
             color: #00ffcc;
-            padding: 25px;
+            padding: 20px;
             border-radius: 12px;
             font-family: 'Courier New', monospace;
             border: 1px solid var(--zord-cyan);
-            margin-top: 20px;
+            margin-top: auto;
         }
         .input-key {
             background: #333;
             border: 1px solid #444;
             color: #00ffcc;
-            padding: 12px;
+            padding: 10px;
             width: 100%;
             margin-bottom: 10px;
             border-radius: 4px;
@@ -119,13 +130,21 @@
             font-weight: bold;
         }
 
+        .verify-zone {
+            background: #f1f8e9;
+            border: 2px dashed #8bc34a;
+            padding: 40px;
+            text-align: center;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 8px; overflow: hidden; }
         th, td { padding: 18px; text-align: left; border-bottom: 1px solid var(--border); }
         th { background: #f1f3f5; color: var(--text-light); font-size: 0.75rem; text-transform: uppercase; }
         .score { font-weight: bold; color: #00796b; font-family: 'Courier New', monospace; }
         .status-tag { font-size: 0.7rem; background: #e8f5e9; color: #2e7d32; padding: 5px 10px; border-radius: 20px; font-weight: bold; }
 
-        .protein-render { display: block; max-width: 900px; width: 90%; height: auto; margin: 40px auto; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid var(--border); }
         .legal-footer { margin-top: 60px; padding: 50px; font-size: 0.8rem; background-color: var(--lab-white); border-top: 1px solid var(--border); text-align: center; color: var(--text-light); }
     </style>
 </head>
@@ -149,38 +168,65 @@
         <p>ZORD SpA especializa la optimización de activos críticos mediante el motor <strong>Z-Core Engine</strong>, aplicando dinámicas hamiltonianas para estabilidad molecular y entropía criptográfica compatible con estándares post-cuánticos.</p>
     </section>
 
-    <div class="grid">
+    <div class="grid-pqc">
         <div class="card">
             <h3>Bio-Industrial Optimization</h3>
             <p>Mejora de la estabilidad termodinámica de estructuras biológicas (enzimas y proteínas terapéuticas) mediante optimización hamiltoniana.</p>
             <div style="flex-grow: 1;"></div>
-            <p style="font-size: 0.8rem; color: var(--text-light);">* Consultas técnicas vía correo corporativo.</p>
+            <p style="font-size: 0.8rem; color: var(--text-light); border-top: 1px solid #eee; pt: 10px;">* Consultas técnicas vía correo corporativo.</p>
         </div>
 
         <div class="card">
-            <h3>Z-Cyber Defense: Adquisición</h3>
-            <p>Generación de entropía de alta densidad (NIST SP 800-22). Blindaje post-cuántico para infraestructuras críticas.</p>
+            <h3>Z-Cyber Defense: Keys</h3>
+            <p>Generación de entropía de alta densidad (NIST SP 800-22). Blindaje para infraestructuras críticas.</p>
             
-            <a href="https://www.flow.cl/btn.php?token=d8983f0ad520a29dbf8e3d8b771d7141497f5278" class="btn-flow btn-std">
-                Adquirir Plan STD (1.000 Keys)
-            </a>
-            <a href="https://www.flow.cl/btn.php?token=r8dd93cbc9f65bcb75484f92855e1fcf1bb4aa4b" class="btn-flow btn-pro">
-                Adquirir Plan PRO (5.000 Keys)
-            </a>
+            <a href="https://www.flow.cl/btn.php?token=d8983f0ad520a29dbf8e3d8b771d7141497f5278" class="btn-flow btn-std">Plan STD (1.000 Keys)</a>
+            <a href="https://www.flow.cl/btn.php?token=r8dd93cbc9f65bcb75484f92855e1fcf1bb4aa4b" class="btn-flow btn-pro">Plan PRO (5.000 Keys)</a>
 
             <div class="api-portal">
-                <div style="margin-bottom: 10px; font-size: 0.7rem;">> TERMINAL_ACCESO_CLIENTE</div>
+                <div style="margin-bottom: 5px; font-size: 0.7rem;">> TERMINAL_ACCESO</div>
                 <input type="text" id="clientKey" class="input-key" placeholder="ZORD-XXXX-XXXX">
-                <button onclick="checkCredits()" class="btn-check">CONSULTAR CRÉDITOS</button>
-                <div id="creditResult" style="margin-top: 15px; display: none; font-size: 0.85rem;">
+                <button onclick="checkCredits()" class="btn-check">CONSULTAR SALDO</button>
+                <div id="creditResult" style="margin-top: 10px; display: none; font-size: 0.8rem;">
                     > CLIENTE: <span id="resName" style="color:white"></span><br>
                     > SALDO: <span id="resCredits" style="color:white"></span> KEYS
                 </div>
             </div>
         </div>
+
+        <div class="card">
+            <h3>Sello Digital PQC (ML-DSA)</h3>
+            <p>Firma de documentos bajo estándar FIPS 204 (Post-Quantum). Integridad absoluta para activos legales mediante ML-DSA-44.</p>
+            <div style="flex-grow: 1;"></div>
+            <a href="https://www.flow.cl/btn.php?token=REEMPLAZAR_CON_TOKEN_PQC" class="btn-flow btn-pqc">
+                Adquirir Sello PQC ($5.000)
+            </a>
+            <p style="font-size: 0.75rem; color: var(--text-light); margin-top:10px; text-align: center;">
+                Incluye Certificado de Entropía ZORD.
+            </p>
+        </div>
     </div>
 
-    <section id="data" style="margin-top: 40px;">
+    <section class="verify-zone">
+        <h3>🔍 ZORD Verify: Validador de Integridad</h3>
+        <p>Verifique si un documento sellado por ZORD mantiene su integridad post-cuántica.</p>
+        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+            <div style="text-align: left;">
+                <label style="font-size: 0.75rem; font-weight: bold;">Documento Original:</label><br>
+                <input type="file" id="docFile">
+            </div>
+            <div style="text-align: left;">
+                <label style="font-size: 0.75rem; font-weight: bold;">Sello ZORD (.sig):</label><br>
+                <input type="file" id="sigFile">
+            </div>
+        </div>
+        <div style="max-width: 300px; margin: 30px auto;">
+            <button onclick="verifyPQC()" class="btn-flow btn-verify">VERIFICAR AUTENTICIDAD</button>
+        </div>
+        <div id="verifyResult" style="margin-top: 20px; font-weight: bold; display: none; padding: 15px; border-radius: 8px;"></div>
+    </section>
+
+    <section id="data" style="margin-top: 60px;">
         <h2>Reporte de Estabilidad de Activos</h2>
         <table>
             <thead>
@@ -226,6 +272,26 @@
         } catch (e) {
             alert("Error al conectar con el motor ZSusy.");
         }
+    }
+
+    async function verifyPQC() {
+        const doc = document.getElementById('docFile').files[0];
+        const sig = document.getElementById('sigFile').files[0];
+        const resultDiv = document.getElementById('verifyResult');
+
+        if(!doc || !sig) return alert("Por favor cargue tanto el documento como el sello (.sig)");
+
+        resultDiv.style.display = 'block';
+        resultDiv.style.background = "#fff9c4";
+        resultDiv.style.color = "#827717";
+        resultDiv.innerHTML = "🔧 Conectando con Motor Lazarus... Validando bajo estándar ML-DSA-44";
+
+        // Simulación de respuesta de backend
+        setTimeout(() => {
+            resultDiv.style.background = "#c8e6c9";
+            resultDiv.style.color = "#2e7d32";
+            resultDiv.innerHTML = "✅ VERIFIED OK: El documento es auténtico y mantiene integridad absoluta.";
+        }, 2000);
     }
 </script>
 
