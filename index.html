@@ -1,68 +1,233 @@
-<style>
-    /* Nueva clase para el Grid de 3 columnas */
-    .grid-pqc { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-    
-    .verify-zone {
-        background: #f1f8e9;
-        border: 2px dashed #8bc34a;
-        padding: 30px;
-        text-align: center;
-        border-radius: 12px;
-        margin-top: 40px;
-    }
-    .btn-verify { background-color: #689f38; color: white; margin-top: 20px; }
-    
-    /* Estilo para el botón de validación PQC */
-    .btn-pqc { background-color: #673ab7; color: white; }
-</style>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://zord.cl/" />
+    <title>ZORD SpA | Bio-Industrial & Cyber Defense</title>
+    <style>
+        :root {
+            --lab-white: #ffffff;
+            --lab-bg: #f8f9fa;
+            --zord-cyan: #00bfa5;
+            --zord-dark: #1a1a1a;
+            --text-main: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dee2e6;
+        }
+        body {
+            background-color: var(--lab-bg);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: var(--lab-white);
+            border-bottom: 2px solid var(--zord-cyan);
+        }
+        .logo-zord {
+            width: 220px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .tagline {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+        
+        .status-bar {
+            background: #e0f2f1;
+            color: #00796b;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            margin-bottom: 40px;
+            border: 1px solid #b2dfdb;
+            display: flex;
+            justify-content: space-between;
+        }
 
-<div class="grid-pqc">
-    <div class="card">
-        <h3>Bio-Industrial Optimization</h3>
-        <p>Estabilidad termodinámica de estructuras biológicas mediante optimización hamiltoniana.</p>
-        <div style="flex-grow: 1;"></div>
-        <p style="font-size: 0.8rem; color: var(--text-light);">* Consultas técnicas vía correo corporativo.</p>
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .card { 
+            background: var(--lab-white); 
+            padding: 30px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+        }
+        .card h3 { 
+            color: var(--zord-cyan); 
+            margin-top: 0; 
+            border-bottom: 1px solid var(--lab-bg);
+            padding-bottom: 10px;
+        }
+
+        /* Estilos de los Botones de Pago */
+        .btn-flow {
+            display: block;
+            text-align: center;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        .btn-std { background-color: #34495e; color: white; }
+        .btn-pro { background-color: var(--zord-cyan); color: white; }
+        .btn-flow:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* Consola de Cliente */
+        .api-portal {
+            background: var(--zord-dark);
+            color: #00ffcc;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            border: 1px solid var(--zord-cyan);
+            margin-top: 20px;
+        }
+        .input-key {
+            background: #333;
+            border: 1px solid #444;
+            color: #00ffcc;
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn-check {
+            background: var(--zord-cyan);
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 18px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: #f1f3f5; color: var(--text-light); font-size: 0.75rem; text-transform: uppercase; }
+        .score { font-weight: bold; color: #00796b; font-family: 'Courier New', monospace; }
+        .status-tag { font-size: 0.7rem; background: #e8f5e9; color: #2e7d32; padding: 5px 10px; border-radius: 20px; font-weight: bold; }
+
+        .protein-render { display: block; max-width: 900px; width: 90%; height: auto; margin: 40px auto; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid var(--border); }
+        .legal-footer { margin-top: 60px; padding: 50px; font-size: 0.8rem; background-color: var(--lab-white); border-top: 1px solid var(--border); text-align: center; color: var(--text-light); }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="Logo ZORD.jpg" alt="ZORD SpA Bio-Engineering" class="logo-zord">
+    <div class="tagline">Z-Omni Revolution Development</div>
+    <div class="tagline">Soberanía Tecnológica y Estabilidad Molecular</div>
+</header>
+
+<div class="container">
+    <div class="status-bar">
+        <span>● DOMAIN_STATUS: zord.cl [ACTIVE]</span>
+        <span>ENTROPY: 7.9999 bits/byte - 512-bit / Layer</span>
+        <span>PATENT: PENDING_202504049</span>
     </div>
 
-    <div class="card">
-        <h3>Z-Cyber Defense: Keys</h3>
-        <p>Entropía de alta densidad para encriptación de capas. Compatible con protocolos AES-256/512.</p>
-        <a href="TU_LINK_FLOW_STD" class="btn-flow btn-std">Plan STD (1.000 Keys)</a>
-        <a href="TU_LINK_FLOW_PRO" class="btn-flow btn-pro">Plan PRO (5.000 Keys)</a>
-        
-        <div class="api-portal">
-            <div style="margin-bottom: 5px; font-size: 0.7rem;">> CONSULTA_SALDO</div>
-            <input type="text" id="clientKey" class="input-key" placeholder="ZORD-XXXX-XXXX">
-            <button onclick="checkCredits()" class="btn-check">VERIFICAR CRÉDITOS</button>
+    <section id="vision">
+        <h2>Protocolo de Operaciones</h2>
+        <p>ZORD SpA especializa la optimización de activos críticos mediante el motor <strong>Z-Core Engine</strong>, aplicando dinámicas hamiltonianas para estabilidad molecular y entropía criptográfica compatible con estándares post-cuánticos.</p>
+    </section>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Bio-Industrial Optimization</h3>
+            <p>Mejora de la estabilidad termodinámica de estructuras biológicas (enzimas y proteínas terapéuticas) mediante optimización hamiltoniana.</p>
+            <div style="flex-grow: 1;"></div>
+            <p style="font-size: 0.8rem; color: var(--text-light);">* Consultas técnicas vía correo corporativo.</p>
+        </div>
+
+        <div class="card">
+            <h3>Z-Cyber Defense: Adquisición</h3>
+            <p>Generación de entropía de alta densidad (NIST SP 800-22). Blindaje post-cuántico para infraestructuras críticas.</p>
+            
+            <a href="https://www.flow.cl/btn.php?token=d8983f0ad520a29dbf8e3d8b771d7141497f5278" class="btn-flow btn-std">
+                Adquirir Plan STD (1.000 Keys)
+            </a>
+            <a href="https://www.flow.cl/btn.php?token=r8dd93cbc9f65bcb75484f92855e1fcf1bb4aa4b" class="btn-flow btn-pro">
+                Adquirir Plan PRO (5.000 Keys)
+            </a>
+
+            <div class="api-portal">
+                <div style="margin-bottom: 10px; font-size: 0.7rem;">> TERMINAL_ACCESO_CLIENTE</div>
+                <input type="text" id="clientKey" class="input-key" placeholder="ZORD-XXXX-XXXX">
+                <button onclick="checkCredits()" class="btn-check">CONSULTAR CRÉDITOS</button>
+                <div id="creditResult" style="margin-top: 15px; display: none; font-size: 0.85rem;">
+                    > CLIENTE: <span id="resName" style="color:white"></span><br>
+                    > SALDO: <span id="resCredits" style="color:white"></span> KEYS
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="card">
-        <h3>Sello Digital PQC (ML-DSA)</h3>
-        <p>Firma de documentos bajo estándar FIPS 204 (Post-Quantum). Integridad absoluta para activos legales.</p>
-        <div style="flex-grow: 1;"></div>
-        <a href="https://www.flow.cl/btn.php?token=NUEVO_TOKEN_VALIDACION" class="btn-flow btn-pqc">
-            Adquirir Sello PQC ($5.000)
-        </a>
-        <p style="font-size: 0.75rem; color: var(--text-light); margin-top:10px;">
-            Incluye: Firma digital + Certificado de Entropía ZORD.
-        </p>
-    </div>
+    <section id="data" style="margin-top: 40px;">
+        <h2>Reporte de Estabilidad de Activos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Entry ID</th>
+                    <th>Clasificación del Activo</th>
+                    <th>Improvement Score</th>
+                    <th>Estatus Legal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>sp|P24096</td><td>Vacuna para Thymidine kinase</td><td class="score">+500%</td><td><span class="status-tag">PATENT_PENDING</span></td></tr>
+                <tr><td>Q95X94</td><td>Therapeutic Protein (C. elegans)</td><td class="score">+582.52%</td><td><span class="status-tag">IP_PROTECTED</span></td></tr>
+            </tbody>
+        </table>
+    </section>
 </div>
 
-<section class="verify-zone">
-    <h3>🔍 ZORD Verify: Validador de Integridad</h3>
-    <p>Verifique si un documento sellado por ZORD ha sido alterado.</p>
-    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-        <div style="text-align: left;">
-            <label style="font-size: 0.7rem; display: block;">Documento (PDF/DOCX):</label>
-            <input type="file" id="docFile">
-        </div>
-        <div style="text-align: left;">
-            <label style="font-size: 0.7rem; display: block;">Sello ZORD (.sig):</label>
-            <input type="file" id="sigFile">
-        </div>
-    </div>
-    <button onclick="verifyPQC()" class="btn-flow btn-verify" style="width: 250px; margin: 20px auto;">VERIFICAR AUTENTICIDAD</button>
-    <div id="verifyResult" style="margin-top: 20px; font-weight: bold; display: none;"></div>
-</section>
+<footer class="legal-footer">
+    <strong>ZORD SpA | Propiedad Industrial Solicitud N° 202504049</strong><br>
+    Sede Central: Villa Alemana - Chile | <a href="mailto:zord.spa@gmail.com">zord.spa@gmail.com</a><br>
+    <small>© 2026 ZORD SpA. Todos los derechos reservados.</small>
+</footer>
+
+<script>
+    async function checkCredits() {
+        const key = document.getElementById('clientKey').value;
+        const resDiv = document.getElementById('creditResult');
+        if(!key) return alert("Ingrese su API-KEY");
+
+        try {
+            const response = await fetch(`https://zsusy-zsecure-engine.onrender.com/api/v1/keys?cantidad=0`, {
+                headers: { 'X-API-KEY': key }
+            });
+            const data = await response.json();
+            if(data.status === "success") {
+                document.getElementById('resName').innerText = data.info.cliente;
+                document.getElementById('resCredits').innerText = data.info.restantes;
+                resDiv.style.display = 'block';
+            } else {
+                alert("Llave inválida o sin créditos.");
+            }
+        } catch (e) {
+            alert("Error al conectar con el motor ZSusy.");
+        }
+    }
+</script>
+
+</body>
+</html>
