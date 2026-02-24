@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZORD | Terminal de Sellado PQC</title>
+    <style>
+        /* Estilos básicos heredados de tu web */
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; color: #2c3e50; text-align: center; padding: 50px; }
+        .terminal { background: #ffffff; max-width: 600px; margin: auto; padding: 40px; border-radius: 12px; border: 2px solid #00bfa5; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h2 { color: #00bfa5; }
+        .btn-sellar { background-color: #673ab7; color: white; padding: 15px 30px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 20px; width: 100%; font-size: 1rem; }
+        .btn-sellar:hover { opacity: 0.9; }
+        #status { margin-top: 20px; font-weight: bold; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+    <div class="terminal">
+        <h2>🛡️ Terminal de Sellado Lazarus</h2>
+        <p>Pago confirmado. Suba el documento que desea blindar con criptografía post-cuántica (FIPS 204).</p>
+        
+        <div style="margin: 30px 0; text-align: left;">
+            <label style="font-weight: bold;">Seleccionar Activo Digital (PDF, DOCX, ZIP):</label><br><br>
+            <input type="file" id="docToSign" style="width: 100%; padding: 10px; border: 1px solid #ccc;">
+        </div>
+
+        <button onclick="generarSello()" class="btn-sellar" id="btnSellar">GENERAR SELLO (.SIG)</button>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        async function generarSello() {
+            const fileInput = document.getElementById('docToSign');
+            const statusDiv = document.getElementById('status');
+            const btn = document.getElementById('btnSellar');
+
+            if (!fileInput.files[0]) return alert("Debe seleccionar un archivo primero.");
+
+            statusDiv.style.color = "#d35400";
+            statusDiv.innerHTML = "⏳ Procesando en motor cuántico... Por favor espere.";
+            btn.disabled = true;
+
+            const formData = new FormData();
+            formData.append('documento', fileInput.files[0]);
+
+            try {
+                const response = await fetch('https://zsusy-zsecure-engine.onrender.com/api/v1/sellar', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    // Forzar la descarga del archivo que envía el servidor
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    // Nombrar el archivo descargado
+                    a.download = fileInput.files[0].name + '.sig';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    
+                    statusDiv.style.color = "#27ae60";
+                    statusDiv.innerHTML = "✅ ¡Éxito! Su sello digital ha sido descargado.";
+                } else {
+                    const err = await response.json();
+                    statusDiv.style.color = "#c0392b";
+                    statusDiv.innerHTML = "❌ Error: " + err.message;
+                }
+            } catch (error) {
+                statusDiv.style.color = "#c0392b";
+                statusDiv.innerHTML = "❌ Error de conexión con Render.";
+            }
+            btn.disabled = false;
+        }
+    </script>
+</body>
+</html>
