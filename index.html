@@ -275,24 +275,50 @@
     }
 
     async function verifyPQC() {
-        const doc = document.getElementById('docFile').files[0];
-        const sig = document.getElementById('sigFile').files[0];
-        const resultDiv = document.getElementById('verifyResult');
+    const docInput = document.getElementById('docFile');
+    const sigInput = document.getElementById('sigFile');
+    const resultDiv = document.getElementById('verifyResult');
 
-        if(!doc || !sig) return alert("Por favor cargue tanto el documento como el sello (.sig)");
+    if(!docInput.files[0] || !sigInput.files[0]) {
+        return alert("Por favor cargue tanto el documento como el sello (.sig)");
+    }
 
-        resultDiv.style.display = 'block';
-        resultDiv.style.background = "#fff9c4";
-        resultDiv.style.color = "#827717";
-        resultDiv.innerHTML = "🔧 Conectando con Motor Lazarus... Validando bajo estándar ML-DSA-44";
+    // Cambiar la UI a estado de "Cargando"
+    resultDiv.style.display = 'block';
+    resultDiv.style.background = "#fff9c4";
+    resultDiv.style.color = "#827717";
+    resultDiv.innerHTML = "🔧 Transfiriendo archivo al Motor Lazarus... Validando bajo estándar ML-DSA-44";
 
-        // Simulación de respuesta de backend
-        setTimeout(() => {
+    // Preparar los archivos para enviarlos al servidor PQC
+    const formData = new FormData();
+    formData.append('documento', docInput.files[0]);
+    formData.append('firma', sigInput.files[0]);
+
+    try {
+        // Enviar la petición a tu API en Render
+        const response = await fetch('https://zsusy-zsecure-engine.onrender.com/api/v1/verificar', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+
+        // Mostrar el resultado de la validación
+        if(data.status === "success" && data.verified === true) {
             resultDiv.style.background = "#c8e6c9";
             resultDiv.style.color = "#2e7d32";
-            resultDiv.innerHTML = "✅ VERIFIED OK: El documento es auténtico y mantiene integridad absoluta.";
-        }, 2000);
+            resultDiv.innerHTML = "✅ " + data.message;
+        } else {
+            resultDiv.style.background = "#ffcdd2";
+            resultDiv.style.color = "#c62828";
+            resultDiv.innerHTML = "❌ " + (data.message || "Error de verificación.");
+        }
+    } catch (error) {
+        resultDiv.style.background = "#ffcdd2";
+        resultDiv.style.color = "#c62828";
+        resultDiv.innerHTML = "❌ Error al conectar con el servidor ZORD: " + error.message;
     }
+}
 </script>
 
 </body>
