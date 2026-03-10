@@ -1,2 +1,3 @@
 # zord-corp
-Página principal de Z-Omni Revolution Development SpA
+Z-Omni Revolution Development SpA
+Diseñamos el futuro
