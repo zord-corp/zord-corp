@@ -125,7 +125,7 @@
     if (tokenFlow) {
         display.innerText = "ACTIVANDO CREDENCIALES...";
         
-        fetch('https://zsusy-zsecure-engine.onrender.com/webhook-flow', {
+        fetch('https://api.zord.cl/webhook-flow', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ token: tokenFlow })
