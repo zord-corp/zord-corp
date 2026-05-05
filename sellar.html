@@ -59,7 +59,7 @@
             formData.append('documento', fileInput.files[0]);
 
             try {
-                const response = await fetch('https://zsusy-zsecure-engine.onrender.com/api/v1/sellar', {
+                const response = await fetch('https://api.zord.cl/api/v1/sellar', {
                     method: 'POST',
                     body: formData
                 });
