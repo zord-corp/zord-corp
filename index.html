@@ -299,28 +299,34 @@ Sello Digital PQC (ML-DSA) <!DOCTYPE html>
     }
 
     async function checkCredits() {
-    const key = document.getElementById('clientKey').value;
+    const key = document.getElementById('clientKey').value.trim();
     const resDiv = document.getElementById('creditResult');
+    
     if(!key) return alert("Ingrese su API-KEY");
 
     try {
-        // Llamamos al nuevo endpoint gratuito
+        // Llamamos al endpoint gratuito en AWS
         const response = await fetch('https://api.zord.cl/api/v1/check_saldo', {
-            headers: { 'X-API-KEY': key }
+            method: 'GET',
+            headers: { 
+                'X-API-KEY': key,
+                'Content-Type': 'application/json'
+            }
         });
+
         const data = await response.json();
 
-        if(data.status === "success") {
-            // Mostramos los datos exactos que el cliente espera
-            document.getElementById('resName').innerText = data.cliente; // Su email
-            document.getElementById('resCredits').innerText = data.saldo; // Sus créditos restantes
+        if (response.ok && data.status === "success") {
+            // Mostramos los datos reales del cliente
+            document.getElementById('resName').innerText = data.cliente; 
+            document.getElementById('resCredits').innerText = data.saldo; 
             resDiv.style.display = 'block';
         } else {
-            alert("API-KEY inválida o expirada.");
+            alert("ZORD dice: " + (data.message || "Llave inválida."));
         }
     } catch (e) {
-        console.error(e);
-        alert("Error de conexión con el motor ZORD.");
+        console.error("Error de conexión:", e);
+        alert("Error al conectar con el motor ZORD. Revise su conexión.");
     }
 }
 
