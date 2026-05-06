@@ -304,7 +304,7 @@ Sello Digital PQC (ML-DSA) <!DOCTYPE html>
         if(!key) return alert("Ingrese su API-KEY");
 
         try {
-            const response = await fetch('https://api.zord.cl/api/v1/keys/?cantidad=0', {
+            const response = await fetch('https://api.zord.cl/keys/?cantidad=0', {
                 headers: { 'X-API-KEY': key }
             });
             const data = await response.json();
