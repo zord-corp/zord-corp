@@ -292,7 +292,7 @@ Sello Digital PQC (ML-DSA) <!DOCTYPE html>
         const email = prompt("Ingrese el correo donde recibirá su credencial:");
         if(email && email.includes('@')) {
             // Mandamos al cliente a nuestra API de Render que creará el pago en Flow
-            window.location.href = `https://api.zord.cl/checkout/${plan}?email=${encodeURIComponent(email)}';
+            window.location.href = `https://api.zord.cl/checkout/${plan}?email=${encodeURIComponent(email)}`;
         } else if (email) {
             alert("Por favor ingrese un correo válido.");
         }
