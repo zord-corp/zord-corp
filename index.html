@@ -1,4 +1,4 @@
-Sello Digital PQC (ML-DSA) <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -57,7 +57,7 @@ Sello Digital PQC (ML-DSA) <!DOCTYPE html>
 
         .grid-pqc { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
             gap: 30px; 
             margin-bottom: 40px;
         }
@@ -167,36 +167,25 @@ Sello Digital PQC (ML-DSA) <!DOCTYPE html>
     <section id="vision">
         <h2>Protocolo de Operaciones y Cumplimiento Normativo</h2>
         <p>ZORD SpA especializa la protección y auditoría de activos digitales críticos mediante el motor criptográfico <strong>Z-Core Engine</strong>. Nuestra infraestructura automatizada garantiza la inmutabilidad y el no repudio, generando entropía de alta densidad y sellos digitales bajo la norma Post-Cuántica <strong>FIPS 204 (ML-DSA-44)</strong>.</p>
-        <p>Nuestros procesos transaccionales y de certificación de integridad documental operan en estricto cumplimiento con la Ley 19.799 sobre Documentos Electrónicos y Firma Electrónica en Chile. A través de criptografía avanzada, garantizamos la trazabilidad, inmutabilidad y autenticidad del origen de cada credencial despachada.</p>
-
-        <div style="background: #e0f2f1; padding: 25px; border-radius: 8px; margin-top: 30px; border-left: 5px solid #00bfa5;">
-            <h3 style="color: #00796b; margin-top: 0; font-size: 1.2rem;">¿Qué entregamos y cómo protege su infraestructura?</h3>
-            <p style="margin-bottom: 15px; font-size: 0.95rem; color: #2c3e50;">
-                Al adquirir nuestras <strong>Credenciales de 512-bits (64 bytes)</strong>, su organización obtiene material criptográfico puro, resistente a ataques cuánticos. Su equipo de desarrollo puede implementarlas de inmediato en tres capas críticas:
-            </p>
-            <ul style="color: #2c3e50; line-height: 1.8; font-size: 0.95rem; margin-bottom: 0;">
-                <li><strong>🛡️ Autenticación M2M (Machine-to-Machine):</strong> Inyecte nuestras llaves como <em>Bearer Tokens</em> para blindar la comunicación entre sus propios servidores, garantizando que solo sistemas autorizados accedan a sus APIs y microservicios.</li>
-                <li><strong>🔐 Cifrado de Datos en Reposo (Master Keys):</strong> Utilice la entropía de ZORD como llave maestra simétrica para encriptar información confidencial de sus clientes, cumpliendo con estándares internacionales de privacidad y prevención de fugas de datos.</li>
-                <li><strong>📜 Firma Inmutable de Webhooks:</strong> Asegure que las transacciones financieras o flujos de datos no sean interceptados ni alterados (previniendo ataques <em>Man-in-the-Middle</em>) mediante validación criptográfica en tránsito.</li>
-            </ul>
-        </div>
+        <p>Nuestros procesos transaccionales y de certificación de integridad documental operan en estricto cumplimiento con la Ley 19.799 sobre Documentos Electrónicos y Firma Electrónica en Chile.</p>
     </section>
 
     <div class="grid-pqc">
+
+        <!-- Tarjeta 1: Sello Digital PQC -->
         <div class="card">
             <h3>Sello Digital PQC (ML-DSA)</h3>
             <p>Firma de documentos bajo el nuevo estándar del NIST (FIPS 204). Integridad absoluta y resistencia contra ataques de computación cuántica para resguardar el valor legal de sus contratos y archivos.</p>
             <div style="flex-grow: 1;"></div>
-            
             <a href="#" onclick="comprarPlan('pqc')" class="btn-flow btn-pqc">
                 Adquirir Sello PQC ($2.500)
             </a>
-            
             <p style="font-size: 0.75rem; color: var(--text-light); margin-top:10px; text-align: center;">
                 Procesamiento automatizado 24/7. Incluye entrega segura TLS.
             </p>
         </div>
 
+        <!-- Tarjeta 2: Z-Cyber Defense API Keys -->
         <div class="card">
             <h3>Z-Cyber Defense API Keys</h3>
             <p>Provisión de credenciales criptográficas inyectadas con entropía de grado militar. Nuestro motor ha superado con tasa de éxito del 100% las baterías de pruebas estadísticas más rigurosas de la industria: <strong>NIST SP 800-22, Dieharder y ENT</strong>.</p>
@@ -222,8 +211,46 @@ Sello Digital PQC (ML-DSA) <!DOCTYPE html>
                 </div>
             </div>
         </div>
+
+        <!-- NUEVA TARJETA: ZSecure Oracle -->
+        <div class="card">
+            <h3>🔮 ZSecure Oracle - Blockchain Randomness</h3>
+            <p><strong>Post-Quantum Verifiable Random Oracle for Smart Contracts.</strong></p>
+            
+            <p>Generate cryptographically secure, quantum-resistant random numbers for your dApps, DeFi protocols, NFT collections, on-chain games, or any blockchain application that requires tamper-proof randomness.</p>
+            
+            <ul style="font-size: 0.92rem; line-height: 1.7; margin: 20px 0;">
+                <li>✅ Powered by Z-Core PQC Entropy Engine (FIPS 204)</li>
+                <li>✅ Deployed on Base (Ethereum L2)</li>
+                <li>✅ Pay-per-use with ETH</li>
+                <li>✅ Easy Solidity integration</li>
+                <li>✅ VRF-Style Proofs + Full Verifiability</li>
+            </ul>
+
+            <!-- Cuadro con la imagen Figure 1 -->
+            <div style="background: #0a0a0a; padding: 15px; border-radius: 10px; border: 1px solid #00bfa5; margin: 20px 0; text-align: center;">
+                <strong style="color: #00ffcc; font-size: 0.85rem;">Figure 1 — Z-SUSY Entropy Extraction Test</strong><br>
+                <img src="Figure1.png" style="max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px;">
+            </div>
+
+            <a href="https://github.com/MagnetMiner/To_clients_ZSecure" target="_blank" class="btn-flow btn-pro" style="margin-bottom: 12px;">
+                📖 View Documentation & Integration Guide
+            </a>
+
+            <p style="font-size: 0.85rem; color: var(--text-light); text-align: center; margin-top: 10px;">
+                Pay with ETH • No mandatory subscription
+            </p>
+
+            <div style="text-align: center; margin-top: 15px;">
+                <a href="mailto:zord.spa@zord.cl" style="color: var(--zord-cyan); font-weight: bold; text-decoration: none;">
+                    Contact for Enterprise / Testnet Access →
+                </a>
+            </div>
+        </div>
+
     </div>
 
+    <!-- El resto de tu página se mantiene igual -->
     <section class="verify-zone">
         <h3>🔍 ZORD Verify: Validador de Integridad</h3>
         <p>Auditoría forense pública. Verifique si un documento sellado por ZORD mantiene su integridad criptográfica inalterada.</p>
@@ -287,11 +314,9 @@ Sello Digital PQC (ML-DSA) <!DOCTYPE html>
 </footer>
 
 <script>
-    // NUEVA LÓGICA DE COMPRA PROFESIONAL
     function comprarPlan(plan) {
         const email = prompt("Ingrese el correo donde recibirá su credencial:");
         if(email && email.includes('@')) {
-            // Mandamos al cliente a nuestra API de Render que creará el pago en Flow
             window.location.href = `https://api.zord.cl/checkout/${plan}?email=${encodeURIComponent(email)}`;
         } else if (email) {
             alert("Por favor ingrese un correo válido.");
@@ -299,36 +324,30 @@ Sello Digital PQC (ML-DSA) <!DOCTYPE html>
     }
 
     async function checkCredits() {
-    const key = document.getElementById('clientKey').value.trim();
-    const resDiv = document.getElementById('creditResult');
-    
-    if(!key) return alert("Ingrese su API-KEY");
+        const key = document.getElementById('clientKey').value.trim();
+        const resDiv = document.getElementById('creditResult');
+        if(!key) return alert("Ingrese su API-KEY");
 
-    try {
-        // Llamamos al endpoint gratuito en AWS
-        const response = await fetch('https://api.zord.cl/api/v1/check_saldo', {
-            method: 'GET',
-            headers: { 
-                'X-API-KEY': key,
-                'Content-Type': 'application/json'
+        try {
+            const response = await fetch('https://api.zord.cl/api/v1/check_saldo', {
+                method: 'GET',
+                headers: { 
+                    'X-API-KEY': key,
+                    'Content-Type': 'application/json'
+                }
+            });
+            const data = await response.json();
+            if (response.ok && data.status === "success") {
+                document.getElementById('resName').innerText = data.cliente; 
+                document.getElementById('resCredits').innerText = data.saldo; 
+                resDiv.style.display = 'block';
+            } else {
+                alert("ZORD dice: " + (data.message || "Llave inválida."));
             }
-        });
-
-        const data = await response.json();
-
-        if (response.ok && data.status === "success") {
-            // Mostramos los datos reales del cliente
-            document.getElementById('resName').innerText = data.cliente; 
-            document.getElementById('resCredits').innerText = data.saldo; 
-            resDiv.style.display = 'block';
-        } else {
-            alert("ZORD dice: " + (data.message || "Llave inválida."));
+        } catch (e) {
+            alert("Error al conectar con el motor ZORD.");
         }
-    } catch (e) {
-        console.error("Error de conexión:", e);
-        alert("Error al conectar con el motor ZORD. Revise su conexión.");
     }
-}
 
     async function verifyPQC() {
         const docInput = document.getElementById('docFile');
@@ -353,7 +372,6 @@ Sello Digital PQC (ML-DSA) <!DOCTYPE html>
                 method: 'POST',
                 body: formData
             });
-
             const data = await response.json();
 
             if(data.status === "success" && data.verified === true) {
@@ -368,7 +386,7 @@ Sello Digital PQC (ML-DSA) <!DOCTYPE html>
         } catch (error) {
             resultDiv.style.background = "#ffcdd2";
             resultDiv.style.color = "#c62828";
-            resultDiv.innerHTML = "❌ Error al conectar con el servidor ZORD: " + error.message;
+            resultDiv.innerHTML = "❌ Error al conectar con el servidor ZORD.";
         }
     }
 </script>
