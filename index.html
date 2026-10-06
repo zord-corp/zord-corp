@@ -53,19 +53,21 @@
             border: 1px solid #b2dfdb;
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
-        .grid-pqc { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-            gap: 30px; 
+        .grid-pqc {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
             margin-bottom: 40px;
         }
 
-        .card { 
-            background: var(--lab-white); 
-            padding: 30px; 
-            border-radius: 12px; 
+        .card {
+            background: var(--lab-white);
+            padding: 30px;
+            border-radius: 12px;
             border: 1px solid var(--border);
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
             display: flex;
@@ -74,9 +76,9 @@
         }
         .card:hover { transform: translateY(-5px); }
 
-        .card h3 { 
-            color: var(--zord-cyan); 
-            margin-top: 0; 
+        .card h3 {
+            color: var(--zord-cyan);
+            margin-top: 0;
             border-bottom: 1px solid var(--lab-bg);
             padding-bottom: 10px;
         }
@@ -85,66 +87,22 @@
             display: block;
             text-align: center;
             padding: 15px;
-            margin-top: 10px;
+            margin-top: auto;
             border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
             text-transform: uppercase;
             font-size: 0.85rem;
             transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-        .btn-std { background-color: #34495e; color: white; }
-        .btn-pro { background-color: var(--zord-cyan); color: white; }
-        .btn-pqc { background-color: #673ab7; color: white; }
-        .btn-verify { background-color: #689f38; color: white; width: 100%; }
-
-        .btn-flow:hover { opacity: 0.9; }
-
-        .api-portal {
-            background: var(--zord-dark);
-            color: #00ffcc;
-            padding: 20px;
-            border-radius: 12px;
-            font-family: 'Courier New', monospace;
-            border: 1px solid var(--zord-cyan);
-            margin-top: auto;
-        }
-        .input-key {
-            background: #333;
-            border: 1px solid #444;
-            color: #00ffcc;
-            padding: 10px;
-            width: 100%;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .btn-check {
-            background: var(--zord-cyan);
+            background-color: var(--zord-cyan);
             color: white;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            cursor: pointer;
-            font-weight: bold;
         }
-
-        .verify-zone {
-            background: #f1f8e9;
-            border: 2px dashed #8bc34a;
-            padding: 40px;
-            text-align: center;
-            border-radius: 12px;
-            margin-top: 40px;
-        }
+        .btn-flow:hover { opacity: 0.9; }
 
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 8px; overflow: hidden; }
         th, td { padding: 18px; text-align: left; border-bottom: 1px solid var(--border); }
         th { background: #f1f3f5; color: var(--text-light); font-size: 0.75rem; text-transform: uppercase; }
-        .score { font-weight: bold; color: #00796b; font-family: 'Courier New', monospace; }
-        .status-tag { font-size: 0.7rem; background: #e8f5e9; color: #2e7d32; padding: 5px 10px; border-radius: 20px; font-weight: bold; border: 1px solid #c8e6c9;}
+        .status-tag { font-size: 0.7rem; background: #e8f5e9; color: #2e7d32; padding: 5px 10px; border-radius: 20px; font-weight: bold; border: 1px solid #c8e6c9; }
 
         .legal-footer { margin-top: 60px; padding: 50px; font-size: 0.8rem; background-color: var(--lab-white); border-top: 1px solid var(--border); text-align: center; color: var(--text-light); }
     </style>
@@ -161,145 +119,79 @@
     <div class="status-bar">
         <span>● DOMAIN_STATUS: zord.cl [ACTIVE]</span>
         <span>ENGINE: Z-Core PQC [ONLINE]</span>
-        <span>COMPLIANCE: LEY 19.799 / FIPS 204</span>
+        <span>ENFOQUE: INTEGRIDAD DIGITAL</span>
     </div>
 
     <section id="vision">
-        <h2>Protocolo de Operaciones y Cumplimiento Normativo</h2>
-        <p>ZORD SpA especializa la protección y auditoría de activos digitales críticos mediante el motor criptográfico <strong>Z-Core Engine</strong>. Nuestra infraestructura automatizada garantiza la inmutabilidad y el no repudio, generando entropía de alta densidad y sellos digitales bajo la norma Post-Cuántica <strong>FIPS 204 (ML-DSA-44)</strong>.</p>
-        <p>Nuestros procesos transaccionales y de certificación de integridad documental operan en estricto cumplimiento con la Ley 19.799 sobre Documentos Electrónicos y Firma Electrónica en Chile.</p>
+        <h2>Ciberdefensa e integridad digital</h2>
+        <p>ZORD SpA se dedica a la protección y auditoría de activos digitales críticos mediante el motor criptográfico <strong>Z-Core Engine</strong>. La infraestructura está orientada a la inmutabilidad y el no repudio, con sellos digitales bajo el estándar post-cuántico <strong>FIPS 204 (ML-DSA-44)</strong>.</p>
+        <p>Los procesos de certificación de integridad documental se alinean con la Ley 19.799 sobre Documentos Electrónicos y Firma Electrónica en Chile.</p>
     </section>
 
     <div class="grid-pqc">
 
-        <!-- Tarjeta 1: Sello Digital PQC -->
         <div class="card">
             <h3>Sello Digital PQC (ML-DSA)</h3>
-            <p>Firma de documentos bajo el nuevo estándar del NIST (FIPS 204). Integridad absoluta y resistencia contra ataques de computación cuántica para resguardar el valor legal de sus contratos y archivos.</p>
-            <div style="flex-grow: 1;"></div>
-            <a href="#" onclick="comprarPlan('pqc')" class="btn-flow btn-pqc">
-                Adquirir Sello PQC ($2.500)
-            </a>
-            <p style="font-size: 0.75rem; color: var(--text-light); margin-top:10px; text-align: center;">
-                Procesamiento automatizado 24/7. Incluye entrega segura TLS.
-            </p>
+            <p>Firma de documentos bajo el estándar del NIST (FIPS 204). Integridad y resistencia frente a computación cuántica para resguardar el valor de contratos y archivos.</p>
+            <p style="font-size: 0.85rem; color: var(--text-light);">Consultas y coordinación por correo.</p>
+            <a href="mailto:zord.spa@zord.cl" class="btn-flow">Contactar</a>
         </div>
 
-        <!-- Tarjeta 2: Z-Cyber Defense API Keys -->
         <div class="card">
-            <h3>Z-Cyber Defense API Keys</h3>
-            <p>Provisión de credenciales criptográficas inyectadas con entropía de grado militar. Nuestro motor ha superado con tasa de éxito del 100% las baterías de pruebas estadísticas más rigurosas de la industria: <strong>NIST SP 800-22, Dieharder y ENT</strong>.</p>
-            
-            <p style="font-size: 0.9rem; margin-bottom: 20px;">
-                Diseñadas específicamente para el blindaje de infraestructuras críticas, cifrado de bases de datos y autenticación en terminales de servidor.
-            </p>
-
-            <div style="background: #f1f3f5; padding: 12px; border-radius: 6px; font-size: 0.8rem; text-align: center; border: 1px dashed var(--border); margin-bottom: 20px;">
-                <strong>¿Requiere escalabilidad corporativa?</strong><br>
-                Para volúmenes superiores a 5.000 llaves, contacte a nuestra división Enterprise en <a href="mailto:zord.spa@zord.cl" style="color: var(--zord-cyan); text-decoration: none; font-weight: bold;">zord.spa@zord.cl</a>
-            </div>
-            <a href="#" onclick="comprarPlan('std')" class="btn-flow btn-std">Plan STD (1.000 Keys)</a>
-            <a href="#" onclick="comprarPlan('pro')" class="btn-flow btn-pro">Plan PRO (5.000 Keys)</a>
-
-            <div class="api-portal" style="margin-top: 20px;">
-                <div style="margin-bottom: 5px; font-size: 0.7rem;">> TERMINAL_AUDITORÍA</div>
-                <input type="text" id="clientKey" class="input-key" placeholder="ZORD-XXXX-XXXX">
-                <button onclick="checkCredits()" class="btn-check">CONSULTAR SALDO</button>
-                <div id="creditResult" style="margin-top: 10px; display: none; font-size: 0.8rem;">
-                    > CLIENTE: <span id="resName" style="color:white"></span><br>
-                    > SALDO: <span id="resCredits" style="color:white"></span> KEYS
-                </div>
-            </div>
+            <h3>Z-Cyber Defense</h3>
+            <p>Credenciales criptográficas con entropía de alta densidad. El motor se evalúa con baterías estadísticas de la industria: <strong>NIST SP 800-22, Dieharder y ENT</strong>.</p>
+            <p style="font-size: 0.9rem;">Orientado al blindaje de infraestructuras críticas, cifrado de bases de datos y autenticación en terminales de servidor.</p>
+            <p style="font-size: 0.85rem; color: var(--text-light);">Para requerimientos corporativos, escriba a la división Enterprise.</p>
+            <a href="mailto:zord.spa@zord.cl" class="btn-flow">zord.spa@zord.cl</a>
         </div>
 
-        <!-- NUEVA TARJETA: ZSecure Oracle -->
         <div class="card">
-            <h3>🔮 ZSecure Oracle - Blockchain Randomness</h3>
-            <p><strong>Post-Quantum Verifiable Random Oracle for Smart Contracts.</strong></p>
-            
-            <p>Generate cryptographically secure, quantum-resistant random numbers for your dApps, DeFi protocols, NFT collections, on-chain games, or any blockchain application that requires tamper-proof randomness.</p>
-            
+            <h3>ZSecure Oracle</h3>
+            <p><strong>Oráculo de aleatoriedad verificable, orientado a contratos inteligentes.</strong></p>
+            <p>Números aleatorios criptográficamente seguros y resistentes a computación cuántica para dApps, protocolos DeFi, colecciones NFT, juegos on-chain u otras aplicaciones que requieren aleatoriedad verificable.</p>
             <ul style="font-size: 0.92rem; line-height: 1.7; margin: 20px 0;">
-                <li>✅ Powered by Z-Core PQC Entropy Engine (FIPS 204)</li>
-                <li>✅ Deployed on Base (Ethereum L2)</li>
-                <li>✅ Pay-per-use with ETH</li>
-                <li>✅ Easy Solidity integration</li>
-                <li>✅ VRF-Style Proofs + Full Verifiability</li>
+                <li>Motor de entropía Z-Core PQC (FIPS 204)</li>
+                <li>Despliegue en Base (Ethereum L2)</li>
+                <li>Integración en Solidity</li>
+                <li>Pruebas estilo VRF y verificabilidad</li>
             </ul>
-
-            <!-- Cuadro con la imagen Figure 1 -->
             <div style="background: #0a0a0a; padding: 15px; border-radius: 10px; border: 1px solid #00bfa5; margin: 20px 0; text-align: center;">
                 <strong style="color: #00ffcc; font-size: 0.85rem;">Figure 1 — Z-SUSY Entropy Extraction Test</strong><br>
-                <img src="Figure1.png" style="max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px;">
+                <img src="Figure1.png" alt="Prueba de extracción de entropía Z-SUSY" style="max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px;">
             </div>
-
-            <a href="https://github.com/MagnetMiner/To_clients_ZSecure" target="_blank" class="btn-flow btn-pro" style="margin-bottom: 12px;">
-                📖 View Documentation & Integration Guide
-            </a>
-
-            <p style="font-size: 0.85rem; color: var(--text-light); text-align: center; margin-top: 10px;">
-                Pay with ETH • No mandatory subscription
-            </p>
-
+            <a href="https://github.com/MagnetMiner/To_clients_ZSecure" target="_blank" rel="noopener" class="btn-flow" style="margin-bottom: 12px;">Documentación e integración</a>
             <div style="text-align: center; margin-top: 15px;">
-                <a href="mailto:zord.spa@zord.cl" style="color: var(--zord-cyan); font-weight: bold; text-decoration: none;">
-                    Contact for Enterprise / Testnet Access →
-                </a>
+                <a href="mailto:zord.spa@zord.cl" style="color: var(--zord-cyan); font-weight: bold; text-decoration: none;">Contacto enterprise / testnet →</a>
             </div>
         </div>
 
     </div>
 
-    <!-- El resto de tu página se mantiene igual -->
-    <section class="verify-zone">
-        <h3>🔍 ZORD Verify: Validador de Integridad</h3>
-        <p>Auditoría forense pública. Verifique si un documento sellado por ZORD mantiene su integridad criptográfica inalterada.</p>
-        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
-            <div style="text-align: left;">
-                <label style="font-size: 0.75rem; font-weight: bold;">Documento Original:</label><br>
-                <input type="file" id="docFile">
-            </div>
-            <div style="text-align: left;">
-                <label style="font-size: 0.75rem; font-weight: bold;">Sello ZORD (.sig):</label><br>
-                <input type="file" id="sigFile">
-            </div>
-        </div>
-        <div style="max-width: 300px; margin: 30px auto;">
-            <button onclick="verifyPQC()" class="btn-flow btn-verify">VERIFICAR AUTENTICIDAD</button>
-        </div>
-        <div id="verifyResult" style="margin-top: 20px; font-weight: bold; display: none; padding: 15px; border-radius: 8px;"></div>
-    </section>
-
     <section id="data" style="margin-top: 60px;">
-        <h2>Reporte de Despliegue y Auditoría de Sistemas</h2>
+        <h2>Componentes de sistemas</h2>
         <table>
             <thead>
                 <tr>
-                    <th>Componente Core</th>
-                    <th>Tecnología / Estándar</th>
-                    <th>Estado de Validación</th>
+                    <th>Componente</th>
+                    <th>Tecnología / estándar</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>Motor Criptográfico Z-Core</strong></td>
+                    <td><strong>Motor criptográfico Z-Core</strong></td>
                     <td>C++ / FIPS 204 (ML-DSA)</td>
-                    <td><span class="status-tag">PASS_AUDIT</span></td>
+                    <td><span class="status-tag">REFERENCIA</span></td>
                 </tr>
                 <tr>
-                    <td><strong>Transaccionalidad Inmutable</strong></td>
+                    <td><strong>Registro de operaciones</strong></td>
                     <td>PostgreSQL / SQLAlchemy</td>
-                    <td><span class="status-tag">OPERATIVE</span></td>
+                    <td><span class="status-tag">INTERNO</span></td>
                 </tr>
                 <tr>
-                    <td><strong>Distribución Segura (Notificación)</strong></td>
-                    <td>Brevo API REST / TLS 1.3</td>
-                    <td><span class="status-tag">SECURE_DELIVERY</span></td>
-                </tr>
-                <tr>
-                    <td><strong>Pasarela de Integridad Financiera</strong></td>
-                    <td>Webhooks Flow / HMAC SHA-256</td>
-                    <td><span class="status-tag">VERIFIED</span></td>
+                    <td><strong>Notificación segura</strong></td>
+                    <td>TLS 1.3</td>
+                    <td><span class="status-tag">ESTÁNDAR</span></td>
                 </tr>
             </tbody>
         </table>
@@ -309,87 +201,9 @@
 <footer class="legal-footer">
     <strong>ZORD SpA | Ciberdefensa e Integridad Digital</strong><br>
     Sede Central: Villa Alemana - Chile | <a href="mailto:zord.spa@gmail.com">zord.spa@gmail.com</a><br>
-    Sistemas auditables y ajustados a la Ley 19.799 sobre Documentos y Firma Electrónica.
+    Referencia normativa: Ley 19.799 sobre Documentos y Firma Electrónica.
     <br><small>© 2026 ZORD SpA. Todos los derechos reservados.</small>
 </footer>
-
-<script>
-    function comprarPlan(plan) {
-        const email = prompt("Ingrese el correo donde recibirá su credencial:");
-        if(email && email.includes('@')) {
-            window.location.href = `https://api.zord.cl/checkout/${plan}?email=${encodeURIComponent(email)}`;
-        } else if (email) {
-            alert("Por favor ingrese un correo válido.");
-        }
-    }
-
-    async function checkCredits() {
-        const key = document.getElementById('clientKey').value.trim();
-        const resDiv = document.getElementById('creditResult');
-        if(!key) return alert("Ingrese su API-KEY");
-
-        try {
-            const response = await fetch('https://api.zord.cl/api/v1/check_saldo', {
-                method: 'GET',
-                headers: { 
-                    'X-API-KEY': key,
-                    'Content-Type': 'application/json'
-                }
-            });
-            const data = await response.json();
-            if (response.ok && data.status === "success") {
-                document.getElementById('resName').innerText = data.cliente; 
-                document.getElementById('resCredits').innerText = data.saldo; 
-                resDiv.style.display = 'block';
-            } else {
-                alert("ZORD dice: " + (data.message || "Llave inválida."));
-            }
-        } catch (e) {
-            alert("Error al conectar con el motor ZORD.");
-        }
-    }
-
-    async function verifyPQC() {
-        const docInput = document.getElementById('docFile');
-        const sigInput = document.getElementById('sigFile');
-        const resultDiv = document.getElementById('verifyResult');
-
-        if(!docInput.files[0] || !sigInput.files[0]) {
-            return alert("Por favor cargue tanto el documento como el sello (.sig)");
-        }
-
-        resultDiv.style.display = 'block';
-        resultDiv.style.background = "#fff9c4";
-        resultDiv.style.color = "#827717";
-        resultDiv.innerHTML = "🔧 Transfiriendo archivo al Motor Lazarus... Validando bajo estándar ML-DSA-44";
-
-        const formData = new FormData();
-        formData.append('documento', docInput.files[0]);
-        formData.append('firma', sigInput.files[0]);
-
-        try {
-            const response = await fetch('https://api.zord.cl/api/v1/verificar', {
-                method: 'POST',
-                body: formData
-            });
-            const data = await response.json();
-
-            if(data.status === "success" && data.verified === true) {
-                resultDiv.style.background = "#c8e6c9";
-                resultDiv.style.color = "#2e7d32";
-                resultDiv.innerHTML = "✅ " + data.message;
-            } else {
-                resultDiv.style.background = "#ffcdd2";
-                resultDiv.style.color = "#c62828";
-                resultDiv.innerHTML = "❌ " + (data.message || "Error de verificación.");
-            }
-        } catch (error) {
-            resultDiv.style.background = "#ffcdd2";
-            resultDiv.style.color = "#c62828";
-            resultDiv.innerHTML = "❌ Error al conectar con el servidor ZORD.";
-        }
-    }
-</script>
 
 </body>
 </html>
