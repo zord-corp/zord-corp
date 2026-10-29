@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://zord.cl/biotecnologia" />
+    <title>ZORD SpA | Biotecnología Deep Tech</title>
+    <!-- NOTA: Usa exactamente el mismo bloque <style> que el archivo index.html de arriba, solo he modificado los colores de los acentos en la tarjeta para ajustarlo al verde/bio. Para no hacer el código excesivamente largo, pega aquí los mismos estilos del root. -->
+    <style>
+        :root {
+            --bg-dark: #05070a;
+            --bg-panel: #0d1117;
+            --neon-cyan: #00ffcc;
+            --neon-blue: #2979ff;
+            --neon-green: #00e676;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --border-glow: 0 0 10px rgba(0, 230, 118, 0.2);
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            margin: 0;
+            line-height: 1.6;
+            background-image: radial-gradient(circle at 50% 0%, #0d1b2a 0%, transparent 50%);
+        }
+        header {
+            padding: 40px 20px 20px;
+            text-align: center;
+            background: linear-gradient(180deg, #020408 0%, transparent 100%);
+        }
+        .logo-zord {
+            width: 220px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 8px rgba(0,255,204,0.5));
+        }
+        .tagline {
+            color: var(--neon-cyan);
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            border-bottom: 1px solid rgba(0, 255, 204, 0.3);
+            background: rgba(13, 17, 23, 0.8);
+            margin-bottom: 30px;
+        }
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+        .nav-link:hover {
+            color: var(--neon-cyan);
+            border-color: rgba(0, 255, 204, 0.5);
+        }
+        .nav-link.active {
+            color: var(--neon-green);
+            border-color: var(--neon-green);
+            background: rgba(0, 230, 118, 0.1);
+            box-shadow: inset 0 0 10px rgba(0, 230, 118, 0.2);
+        }
+
+        .container { max-width: 900px; margin: auto; padding: 20px 20px 60px; }
+
+        .status-bar {
+            background: rgba(13, 17, 23, 0.8);
+            color: var(--neon-green);
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            border-left: 3px solid var(--neon-green);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.1);
+        }
+        .status-bar span::before { content: '>'; margin-right: 8px; color: var(--text-muted); }
+
+        .card {
+            background: var(--bg-panel);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 230, 118, 0.3);
+            box-shadow: var(--border-glow);
+            margin-bottom: 50px;
+        }
+        .card h3 {
+            color: #ffffff;
+            margin-top: 0;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            padding-bottom: 12px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .badge-bio { background: rgba(0, 230, 118, 0.15); color: var(--neon-green); border: 1px solid var(--neon-green); font-size: 0.7rem; padding: 3px 8px; border-radius: 2px; text-transform: uppercase; }
+
+        .btn-terminal {
+            display: inline-block;
+            text-align: center;
+            padding: 15px 30px;
+            margin-top: 20px;
+            background: rgba(0, 230, 118, 0.1);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .btn-terminal:hover {
+            background: rgba(0, 230, 118, 0.2);
+            box-shadow: inset 0 0 15px rgba(0, 230, 118, 0.3);
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: var(--bg-panel); border: 1px solid rgba(255,255,255,0.1); }
+        th, td { padding: 16px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { color: var(--neon-green); font-size: 0.85rem; text-transform: uppercase; background: rgba(0,230,118,0.05); }
+        .cell-highlight { color: #fff; font-weight: bold; }
+
+        .footer { padding: 40px; font-size: 0.8rem; background: #020408; border-top: 1px solid rgba(0,255,204,0.3); text-align: center; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="Logo ZORD.jpg" alt="ZORD SpA" class="logo-zord">
+    <div class="tagline">Z-Omni Revolution Development</div>
+</header>
+
+<nav class="navbar">
+    <a href="index.html" class="nav-link">Ciberseguridad</a>
+    <a href="biotecnologia.html" class="nav-link active">Biotecnología</a>
+</nav>
+
+<div class="container">
+    <div class="status-bar">
+        <span>LAB.STATUS: R&D_ACTIVE</span>
+        <span>PROJECT: ZNUTRI_AMBROSÍA</span>
+        <span>PHASE: VENTURE_CAPITAL_ROUND</span>
+    </div>
+
+    <div class="card">
+        <h3>
+            <span class="badge-bio">Oportunidad de Inversión / I+D</span>
+            ZNutri (Proyecto Ambrosía)
+        </h3>
+        <p style="font-size: 1.1rem;">Ingrediente proteico recombinante hiperestable diseñado <em>in silico</em> mediante la plataforma ZORD BIO ARCHITECT. Una solución Deep Tech para nutrición de alto rendimiento, clínica y emergencias globales.</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px 0;">
+            <div>
+                <h4 style="color: var(--neon-green); border-bottom: 1px solid rgba(0,230,118,0.3); padding-bottom: 5px;">Resultados Biomoleculares</h4>
+                <ul style="font-size: 0.85rem; color: var(--text-main); padding-left: 20px;">
+                    <li><strong>Hiperestabilidad Térmica:</strong> Resiste temperaturas >90°C sin desnaturalizarse. No requiere cadena de frío.</li>
+                    <li><strong>Biodisponibilidad Superior:</strong> Alcanza un puntaje DIAAS de 1.25 (20% superior a la proteína de huevo estándar).</li>
+                    <li><strong>Perfil de Seguridad:</strong> 100% libre de alérgenos. Respuesta insulínica nula (cero carbohidratos netos).</li>
+                </ul>
+            </div>
+            <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 4px; border: 1px dashed rgba(0,230,118,0.2);">
+                <h4 style="color: #fff; margin-top: 0;">Tracción y Escalamiento</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">
+                    El proyecto cuenta con la validación de Libertad de Operación (FTO global < 35%) completada, garantizando un camino despejado hacia la comercialización.<br><br>
+                    Actualmente buscando socios estratégicos, laboratorios y capital semilla (Venture Capital) para la fase de escalamiento industrial.
+                </p>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="mailto:zord.spa@zord.cl?subject=Inversión%20y%20Data%20Room%20ZNutri" class="btn-terminal">Contactar para Inversión / Acceso a Data Room</a>
+        </div>
+    </div>
+
+    <section id="specs">
+        <h2 style="color: var(--neon-green); font-size: 1.2rem; border-bottom: 1px solid rgba(0,230,118,0.2); padding-bottom: 10px;">> PARÁMETROS_BIOTECNOLÓGICOS</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sistema de I+D</th>
+                    <th>Tecnología Subyacente</th>
+                    <th>Hito / Validación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="cell-highlight">ZNutri (Ambrosía)</td>
+                    <td>Proteína Recombinante in silico</td>
+                    <td>DIAAS 1.25 / Tm >90°C</td>
+                </tr>
+                <tr>
+                    <td class="cell-highlight">ZORD Bio Architect</td>
+                    <td>Motor de entropía + Modelamiento IA</td>
+                    <td>FTO Global Completado / Diseño de novo</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+
+<footer class="footer">
+    <strong>ZORD SpA | Biotecnología Deep Tech</strong><br>
+    Sede Central: Villa Alemana - Chile | <a href="mailto:zord.spa@gmail.com">zord.spa@gmail.com</a><br>
+    <small style="opacity: 0.5;">© 2026 ZORD SpA. Todos los derechos reservados.</small>
+</footer>
+
+</body>
+</html>
