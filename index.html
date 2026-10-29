@@ -7,202 +7,298 @@
     <title>ZORD SpA | Ciberdefensa Post-Cuántica</title>
     <style>
         :root {
-            --lab-white: #ffffff;
-            --lab-bg: #f8f9fa;
-            --zord-cyan: #00bfa5;
-            --zord-dark: #1a1a1a;
-            --text-main: #2c3e50;
-            --text-light: #7f8c8d;
-            --border: #dee2e6;
+            --bg-dark: #05070a;
+            --bg-panel: #0d1117;
+            --neon-cyan: #00ffcc;
+            --neon-blue: #2979ff;
+            --neon-green: #00e676;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --border-glow: 0 0 10px rgba(0, 255, 204, 0.2);
         }
         body {
-            background-color: var(--lab-bg);
+            background-color: var(--bg-dark);
             color: var(--text-main);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
             margin: 0;
             line-height: 1.6;
+            background-image: radial-gradient(circle at 50% 0%, #0d1b2a 0%, transparent 50%);
         }
         header {
-            padding: 40px 20px;
+            padding: 40px 20px 20px;
             text-align: center;
-            background-color: var(--lab-white);
-            border-bottom: 2px solid var(--zord-cyan);
+            background: linear-gradient(180deg, #020408 0%, transparent 100%);
         }
         .logo-zord {
             width: 220px;
             height: auto;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 8px rgba(0,255,204,0.5));
         }
         .tagline {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            color: var(--neon-cyan);
+            font-size: 0.95rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            font-weight: 600;
+            font-weight: 700;
         }
-        .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+        
+        /* Menú de Navegación */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            border-bottom: 1px solid rgba(0, 255, 204, 0.3);
+            background: rgba(13, 17, 23, 0.8);
+            margin-bottom: 30px;
+        }
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+        .nav-link:hover {
+            color: var(--neon-cyan);
+            border-color: rgba(0, 255, 204, 0.5);
+        }
+        .nav-link.active {
+            color: var(--neon-cyan);
+            border-color: var(--neon-cyan);
+            background: rgba(0, 255, 204, 0.1);
+            box-shadow: inset 0 0 10px rgba(0, 255, 204, 0.2);
+        }
+
+        .container { 
+            max-width: 1000px; 
+            margin: auto; 
+            padding: 20px 20px 60px; 
+        }
 
         .status-bar {
-            background: #e0f2f1;
-            color: #00796b;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 0.85rem;
+            background: rgba(13, 17, 23, 0.8);
+            color: var(--neon-blue);
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-size: 0.9rem;
             margin-bottom: 40px;
-            border: 1px solid #b2dfdb;
+            border-left: 3px solid var(--neon-blue);
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 15px;
+            box-shadow: 0 0 15px rgba(41, 121, 255, 0.1);
+        }
+        .status-bar span::before {
+            content: '>';
+            margin-right: 8px;
+            color: var(--text-muted);
         }
 
-        .grid-pqc {
+        .grid-tech {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .card {
-            background: var(--lab-white);
+            background: var(--bg-panel);
             padding: 30px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: var(--border-glow);
         }
-        .card:hover { transform: translateY(-5px); }
+        .card:hover { 
+            border-color: var(--neon-cyan);
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.15);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+        }
 
         .card h3 {
-            color: var(--zord-cyan);
+            color: #ffffff;
             margin-top: 0;
-            border-bottom: 1px solid var(--lab-bg);
-            padding-bottom: 10px;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            padding-bottom: 12px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+        .badge {
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        .badge-cyber { background: rgba(41, 121, 255, 0.15); color: var(--neon-blue); border: 1px solid var(--neon-blue); }
+        .badge-sale { background: rgba(0, 255, 204, 0.15); color: var(--neon-cyan); border: 1px solid var(--neon-cyan); }
 
-        .btn-flow {
+        .btn-terminal {
             display: block;
             text-align: center;
-            padding: 15px;
+            padding: 12px;
             margin-top: auto;
-            border-radius: 6px;
+            background: transparent;
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
             text-decoration: none;
             font-weight: bold;
             text-transform: uppercase;
             font-size: 0.85rem;
-            transition: all 0.3s ease;
-            background-color: var(--zord-cyan);
-            color: white;
+            transition: all 0.2s;
+            cursor: pointer;
         }
-        .btn-flow:hover { opacity: 0.9; }
+        .btn-terminal:hover {
+            background: rgba(0, 255, 204, 0.1);
+            box-shadow: inset 0 0 10px rgba(0, 255, 204, 0.2);
+        }
+        
+        .btn-buy {
+            color: #000;
+            background: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+        }
+        .btn-buy:hover {
+            background: #00cca3;
+            color: #000;
+        }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 8px; overflow: hidden; }
-        th, td { padding: 18px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: #f1f3f5; color: var(--text-light); font-size: 0.75rem; text-transform: uppercase; }
-        .status-tag { font-size: 0.7rem; background: #e8f5e9; color: #2e7d32; padding: 5px 10px; border-radius: 20px; font-weight: bold; border: 1px solid #c8e6c9; }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
+            background: var(--bg-panel); 
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        th, td { 
+            padding: 16px; 
+            text-align: left; 
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+        }
+        th { 
+            color: var(--neon-cyan); 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            background: rgba(0,255,204,0.05);
+        }
+        .cell-highlight { color: #fff; font-weight: bold; }
 
-        .legal-footer { margin-top: 60px; padding: 50px; font-size: 0.8rem; background-color: var(--lab-white); border-top: 1px solid var(--border); text-align: center; color: var(--text-light); }
+        .footer { 
+            padding: 40px; 
+            font-size: 0.8rem; 
+            background: #020408; 
+            border-top: 1px solid rgba(0,255,204,0.3); 
+            text-align: center; 
+            color: var(--text-muted); 
+        }
+        .footer a { color: var(--neon-cyan); text-decoration: none; }
     </style>
 </head>
 <body>
 
 <header>
-    <img src="Logo ZORD.jpg" alt="ZORD SpA Ciberdefensa" class="logo-zord">
+    <img src="Logo ZORD.jpg" alt="ZORD SpA" class="logo-zord">
     <div class="tagline">Z-Omni Revolution Development</div>
-    <div class="tagline">Soberanía Tecnológica e Integridad Digital de Alta Densidad</div>
 </header>
+
+<nav class="navbar">
+    <a href="index.html" class="nav-link active">Ciberseguridad</a>
+    <a href="biotecnologia.html" class="nav-link">Biotecnología</a>
+</nav>
 
 <div class="container">
     <div class="status-bar">
-        <span>● DOMAIN_STATUS: zord.cl [ACTIVE]</span>
-        <span>ENGINE: Z-Core PQC [ONLINE]</span>
-        <span>ENFOQUE: INTEGRIDAD DIGITAL</span>
+        <span>SYS.STATUS: SECURE_CORE_ONLINE</span>
+        <span>FRAMEWORK: ZERO-TRUST KERNEL</span>
+        <span>PATENT_PENDING: INAPI CL 202504049</span>
     </div>
 
-    <section id="vision">
-        <h2>Ciberdefensa e integridad digital</h2>
-        <p>ZORD SpA se dedica a la protección y auditoría de activos digitales críticos mediante el motor criptográfico <strong>Z-Core Engine</strong>. La infraestructura está orientada a la inmutabilidad y el no repudio, con sellos digitales bajo el estándar post-cuántico <strong>FIPS 204 (ML-DSA-44)</strong>.</p>
-        <p>Los procesos de certificación de integridad documental se alinean con la Ley 19.799 sobre Documentos Electrónicos y Firma Electrónica en Chile.</p>
-    </section>
-
-    <div class="grid-pqc">
-
+    <div class="grid-tech">
+        
+        <!-- ZSecure HSM / Framework -->
         <div class="card">
-            <h3>Sello Digital PQC (ML-DSA)</h3>
-            <p>Firma de documentos bajo el estándar del NIST (FIPS 204). Integridad y resistencia frente a computación cuántica para resguardar el valor de contratos y archivos.</p>
-            <p style="font-size: 0.85rem; color: var(--text-light);">Consultas y coordinación por correo.</p>
-            <a href="mailto:zord.spa@zord.cl" class="btn-flow">Contactar</a>
-        </div>
-
-        <div class="card">
-            <h3>Z-Cyber Defense</h3>
-            <p>Credenciales criptográficas con entropía de alta densidad. El motor se evalúa con baterías estadísticas de la industria: <strong>NIST SP 800-22, Dieharder y ENT</strong>.</p>
-            <p style="font-size: 0.9rem;">Orientado al blindaje de infraestructuras críticas, cifrado de bases de datos y autenticación en terminales de servidor.</p>
-            <p style="font-size: 0.85rem; color: var(--text-light);">Para requerimientos corporativos, escriba a la división Enterprise.</p>
-            <a href="mailto:zord.spa@zord.cl" class="btn-flow">zord.spa@zord.cl</a>
-        </div>
-
-        <div class="card">
-            <h3>ZSecure Oracle</h3>
-            <p><strong>Oráculo de aleatoriedad verificable, orientado a contratos inteligentes.</strong></p>
-            <p>Números aleatorios criptográficamente seguros y resistentes a computación cuántica para dApps, protocolos DeFi, colecciones NFT, juegos on-chain u otras aplicaciones que requieren aleatoriedad verificable.</p>
-            <ul style="font-size: 0.92rem; line-height: 1.7; margin: 20px 0;">
-                <li>Motor de entropía Z-Core PQC (FIPS 204)</li>
-                <li>Despliegue en Base (Ethereum L2)</li>
-                <li>Integración en Solidity</li>
-                <li>Pruebas estilo VRF y verificabilidad</li>
+            <h3>
+                <span class="badge badge-cyber">Licencia Enterprise</span>
+                ZSecure HSM v3.5
+            </h3>
+            <p>Framework criptográfico nativo de alto rendimiento que opera como una capa universal de blindaje operativo e inmunidad digital bajo filosofía Zero Trust.</p>
+            <ul style="font-size: 0.85rem; color: var(--text-main); padding-left: 20px; margin-bottom: 25px;">
+                <li><strong>Aislamiento y Confinamiento:</strong> Ejecución de hilos en memoria con rutinas de <em>Zero-ización Localizada</em> para prevenir caídas de servidores ante ataques o Ransomware.</li>
+                <li><strong>Certificación GUE/VRF:</strong> Evaluación espectral nativa C++ mediante Ensamble Unitario Gaussiano para oráculos inmutables.</li>
+                <li><strong>Firma Híbrida Post-Cuántica:</strong> Payload blindado de extremo a extremo bajo estándar FIPS 204 (ML-DSA).</li>
             </ul>
-            <div style="background: #0a0a0a; padding: 15px; border-radius: 10px; border: 1px solid #00bfa5; margin: 20px 0; text-align: center;">
-                <strong style="color: #00ffcc; font-size: 0.85rem;">Figure 1 — Z-SUSY Entropy Extraction Test</strong><br>
-                <img src="Figure1.png" alt="Prueba de extracción de entropía Z-SUSY" style="max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px;">
+            <a href="mailto:zord.spa@zord.cl?subject=Requerimiento%20Licencia%20ZSecure%20HSM" class="btn-terminal">Solicitar Licenciamiento Enterprise</a>
+        </div>
+
+        <!-- Sello Digital PQC -->
+        <div class="card">
+            <h3>
+                <span class="badge badge-sale">Venta Directa</span>
+                Sello Digital PQC
+            </h3>
+            <p>Motor de firma documental estructurado bajo algoritmos ML-DSA resistentes a ataques retrospectivos de computación cuántica.</p>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Garantiza la inmutabilidad notarial y contractual, alineado a la Ley 19.799 sobre Documentos Electrónicos. Ideal para resguardo de contratos, auditorías y certificaciones de integridad a largo plazo.</p>
+            
+            <div style="background: rgba(0, 255, 204, 0.05); padding: 15px; border-radius: 4px; border: 1px dashed rgba(0, 255, 204, 0.3); text-align: center; margin: 15px 0 25px 0;">
+                <span style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 5px;">PLAN INDIVIDUAL</span>
+                <strong style="font-size: 1.5rem; color: var(--neon-cyan);">[Ingresar Precio]</strong>
             </div>
-            <a href="https://github.com/MagnetMiner/To_clients_ZSecure" target="_blank" rel="noopener" class="btn-flow" style="margin-bottom: 12px;">Documentación e integración</a>
-            <div style="text-align: center; margin-top: 15px;">
-                <a href="mailto:zord.spa@zord.cl" style="color: var(--zord-cyan); font-weight: bold; text-decoration: none;">Contacto enterprise / testnet →</a>
-            </div>
+
+            <a href="#link-de-pago-o-carrito" class="btn-terminal btn-buy">Adquirir Sello Digital Online</a>
         </div>
 
     </div>
 
-    <section id="data" style="margin-top: 60px;">
-        <h2>Componentes de sistemas</h2>
+    <section id="specs">
+        <h2 style="color: var(--neon-cyan); font-size: 1.2rem; border-bottom: 1px solid rgba(0,255,204,0.2); padding-bottom: 10px;">> MATRIZ_CRIPTOGRÁFICA</h2>
         <table>
             <thead>
                 <tr>
-                    <th>Componente</th>
-                    <th>Tecnología / estándar</th>
-                    <th>Estado</th>
+                    <th>Módulo de Seguridad</th>
+                    <th>Arquitectura Base</th>
+                    <th>Estándar Validado</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>Motor criptográfico Z-Core</strong></td>
-                    <td>C++ / FIPS 204 (ML-DSA)</td>
-                    <td><span class="status-tag">REFERENCIA</span></td>
+                    <td class="cell-highlight">ZSecure Framework</td>
+                    <td>C++ Nativo / Acoplamiento FFI ABI</td>
+                    <td>ML-DSA (FIPS 204) / GUE VRF</td>
                 </tr>
                 <tr>
-                    <td><strong>Registro de operaciones</strong></td>
-                    <td>PostgreSQL / SQLAlchemy</td>
-                    <td><span class="status-tag">INTERNO</span></td>
-                </tr>
-                <tr>
-                    <td><strong>Notificación segura</strong></td>
-                    <td>TLS 1.3</td>
-                    <td><span class="status-tag">ESTÁNDAR</span></td>
+                    <td class="cell-highlight">Sello Documental PQC</td>
+                    <td>Cifrado Híbrido Post-Cuántica</td>
+                    <td>Ley 19.799 (Firma Electrónica)</td>
                 </tr>
             </tbody>
         </table>
     </section>
 </div>
 
-<footer class="legal-footer">
-    <strong>ZORD SpA | Ciberdefensa e Integridad Digital</strong><br>
+<footer class="footer">
+    <strong>ZORD SpA | Ciberdefensa Post-Cuántica</strong><br>
     Sede Central: Villa Alemana - Chile | <a href="mailto:zord.spa@gmail.com">zord.spa@gmail.com</a><br>
-    Referencia normativa: Ley 19.799 sobre Documentos y Firma Electrónica.
-    <br><small>© 2026 ZORD SpA. Todos los derechos reservados.</small>
+    Referencia normativa: Ley 19.799 sobre Documentos y Firma Electrónica.<br>
+    <small style="opacity: 0.5;">© 2026 ZORD SpA. Sistema de Propiedad Intelectual Protegida.</small>
 </footer>
 
 </body>
