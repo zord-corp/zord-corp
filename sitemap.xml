@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+       <loc>https://zord.cl/</loc>
+       <lastmod>2026-10-29T00:44:13+00:00</lastmod>
+       <priority>1.0000</priority>
+  </url>
+  <url>
+       <loc>https://zord.cl/index.html</loc>
+       <lastmod>2026-10-29T00:44:13+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://zord.cl/biotecnologia</loc>
+       <lastmod>2026-10-29T00:44:13+00:00</lastmod>
+       <priority>0.6400</priority>
+  </url>
+</urlset>
