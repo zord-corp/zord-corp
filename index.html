@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-<script src="https://www.paypal.com/sdk/js?client-id=BAA2vDXip3-wkhEKYXgZ9lN3xxZmTvjI1vwPJdGzUNwYZXbu7FNBkbWq4fvz3Bz2NVFqhpLE5pofP1u0q0&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://zord.cl/" />
     <title>ZORD SpA | Ciberdefensa Post-Cuántica & Deep Tech</title>
+    <script src="https://www.paypal.com/sdk/js?client-id=BAA2vDXip3-wkhEKYXgZ9lN3xxZmTvjI1vwPJdGzUNwYZXbu7FNBkbWq4fvz3Bz2NVFqhpLE5pofP1u0q0&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
     <style>
         :root {
             --bg-dark: #05070a;
@@ -82,6 +82,18 @@
         }
 
         .container { max-width: 1150px; margin: auto; padding: 20px 20px 60px; }
+
+        /* Banner de confirmación de pago */
+        .payment-banner {
+            display: none;
+            background: rgba(0, 230, 118, 0.12);
+            border: 1px solid var(--neon-green);
+            color: #fff;
+            padding: 18px 22px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
 
         .status-bar {
             background: rgba(13, 17, 23, 0.8);
@@ -179,6 +191,33 @@
         .btn-purple { border-color: var(--neon-purple); color: #b388ff; background: rgba(124, 77, 255, 0.12); }
         .btn-purple:hover { background: rgba(124, 77, 255, 0.25); color: #fff; }
 
+        .plans-box {
+            background: #04080f;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            padding: 14px;
+            margin-top: 14px;
+        }
+        .plans-title {
+            font-size: 0.72rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .plan-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .plan-row .btn-terminal {
+            flex: 1;
+            margin-top: 0;
+            padding: 9px 6px;
+            font-size: 0.72rem;
+        }
+
         .api-portal {
             background: #04080f;
             color: var(--neon-cyan);
@@ -225,6 +264,9 @@
 </nav>
 
 <div class="container">
+    <!-- BANNER AUTOMÁTICO AL VOLVER DE FLOW O PAYPAL -->
+    <div id="paymentBanner" class="payment-banner"></div>
+
     <div class="status-bar">
         <span>CORE_API: https://api.zord.cl [ONLINE]</span>
         <span>PQC_STANDARD: FIPS 204 / ML-DSA-44</span>
@@ -244,13 +286,28 @@
             <ul style="font-size: 0.82rem; padding-left: 18px; color: var(--text-muted);">
                 <li>Generación de firma híbrida (<code>.sig</code>) con sello de tiempo.</li>
                 <li>Verificación pública de integridad documental.</li>
-                <li>Abono automático de créditos vía Flow.</li>
+                <li>Créditos unificados para <strong>Sellador PQC + FITS Analyzer</strong>.</li>
             </ul>
             
             <div style="margin-top: auto;">
                 <a href="sellar.html" class="btn-terminal btn-buy">Abrir Terminal de Sellado</a>
                 <a href="verificar.html" class="btn-terminal">Validar Documento (.sig)</a>
-                <a href="#" onclick="comprarPlan(5000)" class="btn-terminal btn-secondary">Comprar Créditos ($5.000 CLP)</a>
+
+                <!-- PASARELA UNIFICADA DE CRÉDITOS (FLOW CLP + PAYPAL USD) -->
+                <div class="plans-box">
+                    <div class="plans-title">> Recargar Créditos (Chile · Flow CLP)</div>
+                    <div class="plan-row">
+                        <button onclick="comprarPlan(5000)" class="btn-terminal btn-secondary">100 Cr · $5.000</button>
+                        <button onclick="comprarPlan(49000)" class="btn-terminal btn-secondary">Starter 250 · $49.000</button>
+                    </div>
+                    <div class="plan-row" style="margin-bottom: 12px;">
+                        <button onclick="comprarPlan(199000)" class="btn-terminal btn-secondary">Growth 2.000 · $199.000</button>
+                        <button onclick="comprarPlan(699000)" class="btn-terminal btn-secondary">Scale 10.000 · $699.000</button>
+                    </div>
+
+                    <div class="plans-title" style="border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 10px;">> Internacional · Starter 250 Créditos ($49 USD)</div>
+                    <div id="paypal-container-D33C669RF6VCJ" style="margin-top: 8px;"></div>
+                </div>
             </div>
         </div>
 
@@ -351,8 +408,30 @@
 <script>
     const API_BASE = 'https://api.zord.cl';
 
+    // Renderizar botón oficial PayPal Hosted Button (Starter 250 Créditos - $49 USD)
+    if (window.paypal && paypal.HostedButtons) {
+        paypal.HostedButtons({
+            hostedButtonId: "D33C669RF6VCJ"
+        }).render("#paypal-container-D33C669RF6VCJ");
+    }
+
+    // Mostrar confirmación cuando el cliente regresa de pagar en Flow o PayPal
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const pago = params.get('pago');
+        if (pago === 'paypal_exitoso' || pago === 'flow_retorno') {
+            const banner = document.getElementById('paymentBanner');
+            banner.style.display = 'block';
+            banner.innerHTML = `
+                <strong style="color: var(--neon-green);">[✓] PAGO PROCESADO EN ZORD SpA</strong><br>
+                Tus créditos unificados (Sellador PQC + FITS Analyzer) han sido acreditados al correo electrónico de tu compra.
+            `;
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    });
+
     async function comprarPlan(amount) {
-        const email = prompt("Ingrese el correo electrónico donde recibirá su API Key y recibo:");
+        const email = prompt("Ingrese el correo electrónico donde recibirá su credencial ZORD-XXXX-XXXX y comprobante:");
         if (email && email.includes('@')) {
             try {
                 const response = await fetch(`${API_BASE}/api/payment/create`, {
@@ -364,7 +443,7 @@
                 if (data.status === "success" && data.payment_url) {
                     window.location.href = data.payment_url;
                 } else {
-                    alert("Error al generar el enlace de pago: " + (data.message || "Intente nuevamente."));
+                    alert("Error al generar el enlace de pago: " + (data.detail || data.message || "Intente nuevamente."));
                 }
             } catch (e) {
                 alert("Error de conexión con el servidor de pagos ZORD.");
