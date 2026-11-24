@@ -3,128 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZORD | Transacción Confirmada</title>
+    <title>ZORD | Credencial Activada</title>
     <style>
-        :root {
-            --zord-cyan: #00bfa5;
-            --zord-dark: #1a1a1a;
-            --lab-bg: #f8f9fa;
-            --text-main: #2c3e50;
-        }
         body {
-            background-color: var(--lab-bg);
-            color: var(--text-main);
-            font-family: 'Segoe UI', sans-serif;
+            background-color: #05070a;
+            color: #c9d1d9;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
         .card {
-            background: white;
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            max-width: 600px;
+            background: #0d1117;
+            padding: 40px;
+            border-radius: 8px;
+            max-width: 580px;
+            width: 100%;
             text-align: center;
-            border-top: 5px solid var(--zord-cyan);
+            border: 1px solid #00ffcc;
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.15);
         }
-        h1 {
-            color: var(--zord-cyan);
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-        .status-msg {
-            font-weight: 300;
-            color: var(--text-main);
-            margin-bottom: 30px;
-        }
+        h1 { color: #00e676; font-size: 1.5rem; margin-top: 0; }
         .api-box {
-            background: var(--zord-dark);
+            background: #04080f;
             color: #00ffcc;
-            padding: 30px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            position: relative;
+            padding: 25px;
+            border-radius: 6px;
             margin: 25px 0;
-            border: 1px solid #333;
+            border: 1px dashed rgba(0, 255, 204, 0.4);
         }
-        .api-box small {
-            color: #7f8c8d;
-            display: block;
-            margin-bottom: 10px;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-        }
-        .key-text {
-            font-size: 1.4rem;
-            font-weight: bold;
-            display: block;
-            word-break: break-all;
-        }
-        .footer-info {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            margin-top: 30px;
-            line-height: 1.5;
-        }
+        .api-box small { color: #8b949e; display: block; margin-bottom: 10px; font-size: 0.75rem; }
+        .key-text { font-size: 1.3rem; font-weight: bold; word-break: break-all; }
         .btn-return {
             display: inline-block;
-            margin-top: 30px;
-            padding: 12px 30px;
-            background-color: var(--zord-cyan);
-            color: white;
+            margin-top: 20px;
+            padding: 12px 28px;
+            background-color: #00ffcc;
+            color: #000;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 4px;
             font-weight: bold;
-            transition: 0.3s;
-        }
-        .btn-return:hover {
-            background-color: #008e7a;
-            transform: translateY(-2px);
+            text-transform: uppercase;
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h1>¡PAGO CONFIRMADO!</h1>
-    <p class="status-msg">Su transacción ha sido procesada exitosamente por los sistemas de <strong>ZORD SpA</strong>.</p>
+    <h1>[+] TRANSACCIÓN CONFIRMADA</h1>
+    <p style="font-size: 0.9rem; color: #8b949e;">Su pago ha sido procesado por ZORD SpA.</p>
 
     <div class="api-box">
-        <small>> SU API-KEY DE ACCESO:</small>
-        <span class="key-text" id="generatedKey">VALIDANDO CREDENCIALES...</span>
+        <small>> SU CREDENCIAL API_KEY:</small>
+        <span class="key-text" id="generatedKey">VALIDANDO PAGO...</span>
     </div>
 
-    <div class="footer-info">
-        Se ha enviado un respaldo de esta credencial y el manual de integración a su correo electrónico registrado. <br>
-        <strong>Soberanía Tecnológica y Estabilidad Molecular.</strong>
-    </div>
+    <p style="font-size: 0.8rem; color: #8b949e; line-height: 1.5;">
+        Se ha enviado un respaldo a su correo electrónico. Conserve esta llave para operar el Sellador PQC, FITS Analyzer y el Oráculo en Base Mainnet.
+    </p>
 
-    <a href="https://zord.cl" class="btn-return">VOLVER AL TERMINAL</a>
+    <a href="https://zord.cl/" class="btn-return">Volver al Terminal</a>
 </div>
 
 <script>
-    // Este script puede capturar la llave de la URL si decides enviarla vía parámetros
     const urlParams = new URLSearchParams(window.location.search);
-    const key = urlParams.get('key');
-    if (key) {
-        document.getElementById('generatedKey').innerText = key;
-    } else {
-        document.getElementById('generatedKey').innerText = "REVISE SU EMAIL";
-        document.getElementById('generatedKey').style.color = "#7f8c8d";
-    }
-</script>
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
+    const keyDirecta = urlParams.get('key');
     const tokenFlow = urlParams.get('token');
     const display = document.getElementById('generatedKey');
 
-    if (tokenFlow) {
+    if (keyDirecta) {
+        display.innerText = keyDirecta;
+    } else if (tokenFlow) {
         display.innerText = "ACTIVANDO CREDENCIALES...";
-        
         fetch('https://api.zord.cl/webhook-flow', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -132,16 +86,17 @@
         })
         .then(res => res.json())
         .then(data => {
-            if(data.status === "success") {
+            if (data.status === "success" && data.key) {
                 display.innerText = data.key;
-                display.style.color = "#00ffcc";
             } else {
-                display.innerText = "ERROR EN ACTIVACIÓN";
+                display.innerText = "REVISE SU CORREO ELECTRÓNICO";
             }
         })
-        .catch(err => {
-            display.innerText = "REVISE SU EMAIL";
+        .catch(() => {
+            display.innerText = "REVISE SU CORREO ELECTRÓNICO";
         });
+    } else {
+        display.innerText = "REVISE SU CORREO ELECTRÓNICO";
     }
 </script>
 </body>
